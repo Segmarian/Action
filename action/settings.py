@@ -25,7 +25,7 @@ SECRET_KEY = 'wg)&2v*0fpbrk3=0f(1%79k(fc897spa!!t26isfp0gig_vq()'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [127.0.0.1, 'character.pythonanywhere.com']
 
 
 # Application definition
@@ -76,10 +76,14 @@ WSGI_APPLICATION = 'action.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '/path/to/my.cnf',
+        },
     }
 }
 
