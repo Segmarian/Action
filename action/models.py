@@ -30,10 +30,10 @@ class Schtick(models.Model):
         return self.name + "(Tier " + str(self.tier) + ")"
 
     name = models.CharField('Name', max_length=120)
-    req = models.ForeignKey("Prereq", on_delete=models.PROTECT)
-    cost = models.CharField(max_length=120)
-    description = models.TextField('Description')
-    tier = models.PositiveSmallIntegerField()
+    prereq = models.ForeignKey("Prereq", on_delete=models.PROTECT, null=True, blank=True)
+    cost = models.CharField("Cost", max_length=120, null=True, blank=True)
+    description = models.TextField('Description', null=True, blank=True)
+    tier = models.PositiveSmallIntegerField("Tier", null=True, blank=True)
 
 
 class Advancement(models.Model):
@@ -43,9 +43,8 @@ class Advancement(models.Model):
 
     schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT)
     name = models.CharField('Name', max_length=120)
-    req = models.DateTimeField('Event Date')
-    description = models.CharField('Description', max_length=120)
-    prereq = models.ForeignKey("Prereq", on_delete=models.PROTECT)
+    description = models.CharField('Description', max_length=120, null=True, blank=True)
+    prereq = models.ForeignKey("Prereq", on_delete=models.PROTECT, null=True, blank=True)
 
 
 class ValuePair(models.Model):
@@ -53,11 +52,11 @@ class ValuePair(models.Model):
     def __str__(self):
         return self.name + "(Tier " + str(self.tier) + ")"
 
-    attribute = models.ForeignKey(Attribute, on_delete=models.PROTECT)
-    skill = models.ForeignKey(Skill, on_delete=models.PROTECT)
-    proficiency = models.ForeignKey(Proficiency, on_delete=models.PROTECT)
-    schtick = models.ForeignKey("Schtick", on_delete=models.PROTECT)
-    value = models.PositiveSmallIntegerField()
+    attribute = models.ForeignKey(Attribute, on_delete=models.PROTECT, null=True, blank=True)
+    skill = models.ForeignKey(Skill, on_delete=models.PROTECT, null=True, blank=True)
+    proficiency = models.ForeignKey(Proficiency, on_delete=models.PROTECT, null=True, blank=True)
+    schtick = models.ForeignKey("Schtick", on_delete=models.PROTECT, null=True, blank=True)
+    value = models.PositiveSmallIntegerField("Value")
 
 
 class Flaw(ValuePair):
