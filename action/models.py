@@ -46,7 +46,7 @@ class Schtick(models.Model):
     type = models.ForeignKey("SchtickType", on_delete=models.PROTECT)
 
 
-class SchtickMod(ValuePair)
+class SchtickMod(ValuePair):
     def __str__(self):
         return self.name
 
@@ -62,7 +62,7 @@ class SchtickMod(ValuePair)
     value = models.PositiveSmallIntegerField("Value")
 
 
-class Tag(models.Model)
+class Tag(models.Model):
     def __str__(self):
         return self.name
 
