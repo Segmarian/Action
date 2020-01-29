@@ -30,7 +30,7 @@ class Schtick(models.Model):
         return self.name + "(Tier " + str(self.tier) + ")"
 
     name = models.CharField('Name', max_length=120)
-    prereq = models.ForeignKey("Prereq", on_delete=models.PROTECT, null=True, blank=True)
+    req = models.ForeignKey("Prereq", on_delete=models.PROTECT, null=True, blank=True, related_name="schtickreq")
     cost = models.CharField("Cost", max_length=120, null=True, blank=True)
     description = models.TextField('Description', null=True, blank=True)
     tier = models.PositiveSmallIntegerField("Tier", null=True, blank=True)
@@ -44,7 +44,7 @@ class Advancement(models.Model):
     schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT)
     name = models.CharField('Name', max_length=120)
     description = models.CharField('Description', max_length=120, null=True, blank=True)
-    prereq = models.ForeignKey("Prereq", on_delete=models.PROTECT, null=True, blank=True)
+    req = models.ForeignKey("Prereq", on_delete=models.PROTECT, null=True, blank=True)
 
 
 class ValuePair(models.Model):
@@ -52,10 +52,10 @@ class ValuePair(models.Model):
     def __str__(self):
         return self.name + "(Tier " + str(self.tier) + ")"
 
-    attribute = models.ForeignKey(Attribute, on_delete=models.PROTECT, null=True, blank=True)
-    skill = models.ForeignKey(Skill, on_delete=models.PROTECT, null=True, blank=True)
-    proficiency = models.ForeignKey(Proficiency, on_delete=models.PROTECT, null=True, blank=True)
-    schtick = models.ForeignKey("Schtick", on_delete=models.PROTECT, null=True, blank=True)
+    attribute = models.ForeignKey(Attribute, on_delete=models.PROTECT, null=True, blank=True, related_name="pv_attribute")
+    skill = models.ForeignKey(Skill, on_delete=models.PROTECT, null=True, blank=True, related_name="pv_skill")
+    proficiency = models.ForeignKey(Proficiency, on_delete=models.PROTECT, null=True, blank=True, related_name="pv_proficiency")
+    schtick = models.ForeignKey("Schtick", on_delete=models.PROTECT, null=True, blank=True, related_name="pv_schtick")
     value = models.PositiveSmallIntegerField("Value")
 
 
