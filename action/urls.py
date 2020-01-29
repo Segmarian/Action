@@ -1,5 +1,5 @@
 from character.views import *
-from schtick.views import *
+from action.views import *
 
 """action URL Configuration
 
