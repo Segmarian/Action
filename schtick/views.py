@@ -6,20 +6,14 @@ from django.views.generic import ListView, DetailView
 from character.models import *
 
 from schtick.models import *
-from character.models import *
 
 
 class SchtickListView (ListView):
     model = Schtick
+    template_name = "templates/schtick_list.html"
 
 
 class SchtickDetailView (DetailView):
     model = Schtick
+    template_name = "templates/schtick_detail.html"
 
-
-class CharacterListView (ListView):
-    model = Character
-
-
-class CharacterDetailView (DetailView):
-    model = Character
