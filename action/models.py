@@ -87,16 +87,7 @@ class SchtickMod(ValuePair):
     def __str__(self):
         return self.name
 
-    schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT)
-    attribute = models.ForeignKey(Attribute, on_delete=models.PROTECT,
-                null=True, blank=True, related_name="pv_attribute")
-    skill = models.ForeignKey(Skill, on_delete=models.PROTECT,
-                null=True, blank=True, related_name="pv_skill")
-    proficiency = models.ForeignKey(Proficiency, on_delete=models.PROTECT,
-                null=True, blank=True, related_name="pv_proficiency")
-    schtick = models.ForeignKey("Schtick", on_delete=models.PROTECT,
-                null=True, blank=True, related_name="pv_schtick")
-    value = models.PositiveSmallIntegerField("Value")
+    linked_schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT)
 
 
 class Flaw(ValuePair):
