@@ -7,8 +7,12 @@ from action.models import Attribute, Skill, Flaw, Proficiency, Schtick
 
 
 class Character(models.Model):
-    name = models.CharField('Name', max_length=120)
+    def __str__(self):
+        return self.name;
 
+    name = models.CharField('Name', max_length=120)
+    points = models.PositiveIntegerField('Points', null=True, blank=True)
+    notes = models.CharField('Notes', max_length=120, null=True, blank=True)
 
 class CharacterMixin(models.Model):
     character = models.ForeignKey(Character, on_delete=models.PROTECT)
