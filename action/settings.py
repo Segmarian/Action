@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import MySQLdb
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -79,11 +80,12 @@ WSGI_APPLICATION = 'action.wsgi.application'
 
 
 DATABASES = {
-    'default': {
+        'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': '/path/to/my.cnf',
-        },
+        'NAME': 'Character$action',
+        'USER': 'Character',
+        'PASSWORD': 'F14TomcatDarkEmpires!',
+        'HOST': 'Character.mysql.pythonanywhere-services.com',
     }
 }
 
@@ -124,4 +126,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATIC_ROOT = 'static/'
 STATIC_URL = '/static/'

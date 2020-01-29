@@ -13,7 +13,12 @@ class Proficiency(models.Model):
 
 
 class Attribute(models.Model):
+
+    def __str__(self):
+        return self.name + " (" + str(self.start)+ ")"
+
     name = models.CharField('Name', max_length=120)
+    short_name = models.CharField('Short Name', max_length=10, null=True, blank=True)
     start = models.SmallIntegerField()
 
 
