@@ -30,7 +30,7 @@ class Schtick(models.Model):
         return self.name + "(Tier " + str(self.tier) + ")"
 
     name = models.CharField('Name', max_length=120)
-    req = models.ForeignKey("Attribute", on_delete=models.PROTECT)
+    req = models.ForeignKey("Prereq", on_delete=models.PROTECT)
     cost = models.CharField(max_length=120)
     description = models.TextField('Description')
     tier = models.PositiveSmallIntegerField()
