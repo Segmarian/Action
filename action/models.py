@@ -70,7 +70,6 @@ class Tag(models.Model):
 
 
 class Advancement(models.Model):
-
     def __str__(self):
         return self.name + "(Schtick " + str(self.schtick) + ")"
 
@@ -83,7 +82,6 @@ class Advancement(models.Model):
 
 
 class ValuePair(models.Model):
-
     def __str__(self):
         return self.name + "(Tier " + str(self.tier) + ")"
 
@@ -123,7 +121,7 @@ class Modifier(ValuePair):
             sign="-"
         else:
             sign="+"
-        return self.sign + " "+ \
+        return sign + " "+ \
             str(self.value) + " " + \
             self.attribute.name + \
             self.skill.name + \
