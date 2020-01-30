@@ -12,7 +12,7 @@ class CharacterListView (ListView):
     fields = '__all__'
 
 
-class CharacterDetailView (UpdateView):
+class CharacterUpdateView (UpdateView):
     model = Character
     template = "templates/character_detail.html"
     fields = '__all__'
