@@ -10,8 +10,9 @@ from .models import *
 class CharacterListView (ListView):
     model = Character
     template = "templates/character_list.html"
-
+    fields = '__all__'
 
 class CharacterDetailView (DetailView):
     model = Character
     template = "templates/character_detail.html"
+    fields = '__all__'
