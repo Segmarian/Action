@@ -11,9 +11,9 @@ from schtick.models import *
 class SchtickListView (ListView):
     model = Schtick
     template_name = "templates/schtick_list.html"
-
+    fields = '__all__'
 
 class SchtickDetailView (DetailView):
     model = Schtick
     template_name = "templates/schtick_detail.html"
-
+    fields = '__all__'
