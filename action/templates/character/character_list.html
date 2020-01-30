@@ -5,7 +5,15 @@
     <title>Action!</title>
 </head>
 <body>
-{% for character in object_list %}
-    <li>{{ character.name }}</li>
-{% endfor %}</body>
+{% if object %}
+<div>{{object.name}}</div>
+{% else %}
+{% for object in object_list %}
+<div>
+<a href="/characters/{{object.pk}}/">{{ object.name }}</a>
+</div>
+{% empty %}
+{% endfor %}
+{% endif %}
+</body>
 </html>

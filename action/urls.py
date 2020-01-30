@@ -21,8 +21,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^characters/<int:pk>/$', CharacterDetailView.as_view(), name="character_detail"),
+    url(r'^characters/<int:pk>/$', CharacterUpdateView.as_view(), name="character_detail"),
     url(r'^characters/$', CharacterListView.as_view(), name="characters"),
-    url(r'^schticks/<int:pk>/$', SchtickDetailView.as_view(), name="schtick_detail"),
+    url(r'^schticks/<int:pk>/$', SchtickUpdateView.as_view(), name="schtick_detail"),
     url(r'^schticks/$', SchtickListView.as_view(), name="schticks"),
 ]

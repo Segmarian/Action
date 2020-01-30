@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
-from django.views.generic import DetailView, ListView
-from .models import *
-# Create your views here.
+from django.views.generic import ListView, UpdateView
+
+from character.models import *
 
 
 class CharacterListView (ListView):
@@ -12,7 +11,8 @@ class CharacterListView (ListView):
     template = "templates/character_list.html"
     fields = '__all__'
 
-class CharacterDetailView (DetailView):
+
+class CharacterDetailView (UpdateView):
     model = Character
     template = "templates/character_detail.html"
     fields = '__all__'
