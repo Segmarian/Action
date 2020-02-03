@@ -2,22 +2,24 @@
 from __future__ import unicode_literals
 
 from django.contrib import messages
-from django.forms import ModelMultipleChoiceField
+from django.forms import ModelMultipleChoiceField, CheckboxSelectMultiple
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView
 
+from character.forms import CharacterSkillFormset, CharacterSchtickFormset, CharacterFlawFormset, CharacterAttributeFormset, \
+    CharacterProficiencyFormset, CharacterSkillForm, CharacterProficiencyForm
 from character.models import *
 
 
 class CharacterListView (ListView):
     model = Character
-    template = "templates/character_list.html"
+    template_name = "character/character_list.html"
     fields = '__all__'
 
 
 class CharacterUpdateView (UpdateView):
     model = Character
-    template = "templates/character_detail.html"
+    template_name = "character/character_detail.html"
     fields = '__all__'
     success_url = reverse_lazy('character_detail')
 
@@ -27,36 +29,18 @@ class CharacterUpdateView (UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        chosen_character = context['pk']
-        context['form'].fields['character_skill'] = \
-            ModelMultipleChoiceField(
-                CharacterSkill.objects.filter(character=chosen_character),
-                required=False
-            )
-        context['form'].fields['character_attributes'] = \
-            ModelMultipleChoiceField(
-                CharacterAttribute.objects.filter(character=chosen_character),
-                required=False
-            )
-        context['form'].fields['character_skills'] = \
-            ModelMultipleChoiceField(
-                CharacterSkill.objects.filter(character=chosen_character),
-                required=False
-            )
-        context['form'].fields['character_schticks'] = \
-            ModelMultipleChoiceField(
-                CharacterSchtick.objects.filter(character=chosen_character),
-                required=False
-            )
-        context['form'].fields['character_proficiencies'] = \
-            ModelMultipleChoiceField(
-                CharacterProficiency.objects.filter(character=chosen_character),
-                required=False
-            )
-        context['form'].fields['character_flaws'] = \
-            ModelMultipleChoiceField(
-                CharacterFlaw.objects.filter(character=chosen_character),
-                required=False
-            )
+        '''chosen_character = context['pk']'''
+        '''context['character_skill_form'] = CharacterSkillFormset()'''
+        context['character_attribute_form'] = CharacterAttributeFormset()
+        context['skills']={}
+        skill_form = {}
+        for skill in Skill.objects.all():
+            skill_form[skill.name] = {skill.name, CharacterSkillForm()}
+            for proficiency in Proficiency.objects.filter(skill=skill):
+                skill_form[proficiency.name] = {proficiency.name, CharacterProficiencyForm()}
+        context['skills'] = skill_form
+        '''context['character_skill_form']['character_proficiency_form'] = CharacterProficiencyFormset()'''
+        context['character_schtick_form'] = CharacterSchtickFormset()
+        context['character_flaw_form'] = CharacterFlawFormset()
 
         return context

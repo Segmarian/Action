@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Action!</title>
-</head>
-<body>
-{% if object %}
-<div>{{object.name}}</div>
-{% else %}
+{% extends "base.html" %}
+
+{% block head %}
+    {{ filter.form.media.css }}
+{% endblock head %}
+
+{% block content %}
 {% for object in object_list %}
-<div>
+<div class="col">
 <a href="/characters/{{object.pk}}/">{{ object.name }}</a>
 </div>
-{% empty %}
 {% endfor %}
-{% endif %}
-</body>
-</html>
+{% endblock content %}

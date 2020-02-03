@@ -4,18 +4,24 @@ from django.db import models
 class Skill(models.Model):
     name = models.CharField('Name', max_length=120)
 
+    def __str__(self):
+        return self.name
+
 
 class Proficiency(models.Model):
     class Meta:
         verbose_name_plural="Proficiencies"
 
     name = models.CharField('Name', max_length=120)
+    skill = models.ForeignKey(Skill, on_delete=models.PROTECT)
+    def __str__(self):
+        return self.name
 
 
 class Attribute(models.Model):
 
     def __str__(self):
-        return self.name + " (" + str(self.start)+ ")"
+        return self.name
 
     name = models.CharField('Name', max_length=120)
     short_name = models.CharField('Short Name', max_length=10, null=True, blank=True)
