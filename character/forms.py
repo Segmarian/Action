@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-from crispy_forms.helper import FormHelper
 from django.forms import ModelForm, IntegerField, formset_factory, modelformset_factory, BooleanField, \
     inlineformset_factory, CharField
 
