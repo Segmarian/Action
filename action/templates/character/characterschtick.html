@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ filter.form.media.css }}
+{% endblock head %}
+
+{% block content%}
+<div class="main"></div>
+<div class="container">
+<form class="card row" action="/characters/{{object.pk}}/" method="post">
+<div class="card-body row">
+{% csrf_token %}
+{{ character_attribute_form.management_form }}
+    {% for form1 in form %}
+    <div class="form-inline col-sm-4" style="margin-bottom:20px">
+        {% for field in form1 %}
+            {% if field.label == "Attribute" %}
+                <div class="col">{{ field }}</div>
+            {%  else %}
+                {% if not field.is_hidden %}
+                    <div class="col"><div class="float-left">{{field}}</div></div>
+                    {% else %}
+                    <div>{{field}}</div>
+                {% endif %}
+
+            {%  endif %}
+        {% endfor %}
+        <input type='hidden' id='id_form{{form.id}}' name='form{{form.id}}' value='{{form.id}}' />
+    </div>
+    {% endfor %}
+</div>
+<div class="row card-body">
+    <input type="submit" name="character_attribute" class="btn btn-primary" value="Submit">
+</div>
+</form>
+</div>
+{% endblock content%}

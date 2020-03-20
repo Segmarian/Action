@@ -5,9 +5,30 @@
 {% endblock head %}
 
 {% block content %}
-{% for object in object_list %}
-<div class="col">
-<a href="/characters/{{object.pk}}/">{{ object.name }}</a>
-</div>
-{% endfor %}
+    <div class="main"></div>
+    <div class="main"></div>
+    <table class="table">
+        <thead class="table">
+        <tr>
+            <th class="table">
+                Name
+            </th>
+            <th class="table">
+                Points
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td class="table">
+                        <a href="/characters/{{object.pk}}/skill">{{ object.name }}</a>
+                    </td>
+                    <td class="table">
+                        {{ object.points }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock content %}

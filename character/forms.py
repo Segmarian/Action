@@ -1,53 +1,69 @@
 from __future__ import unicode_literals
-
-from django.forms import ModelForm, IntegerField, formset_factory, modelformset_factory, BooleanField
+from crispy_forms.helper import FormHelper
+from django.forms import ModelForm, IntegerField, formset_factory, modelformset_factory, BooleanField, \
+    inlineformset_factory, CharField
 
 from character.models import Character, CharacterSkill, CharacterProficiency, CharacterAttribute, CharacterFlaw, \
     CharacterSchtick
 
-from django.forms.widgets import CheckboxSelectMultiple
+from django.forms import CheckboxSelectMultiple, Textarea, TextInput, NumberInput, HiddenInput, ChoiceField, \
+    BaseInlineFormSet
 
 from character.models import *
 
 
 class CharacterDetailForm(ModelForm):
+
     class Meta:
         model = Character
-        fields = '__all__'
+        fields = ['name', 'points', 'notes']
+    name = CharField()
+    name.widget.attrs['class'] = 'form-control'
+    points = IntegerField()
+    points.widget.attrs['class'] = 'form-control'
+    notes = CharField(widget=Textarea())
+    notes.widget.attrs['class'] = 'form-control'
 
 
 class CharacterSkillForm(ModelForm):
     class Meta:
         model = CharacterSkill
-        fields = ['points']
+        fields = ['skill', 'points', 'character']
+        widgets = {'character': HiddenInput(),
+                   'skill': HiddenInput()}
 
 
 class CharacterProficiencyForm(ModelForm):
     class Meta:
         model = CharacterProficiency
-        fields = ['acquired']
-        acquired = BooleanField(widget=CheckboxSelectMultiple)
+        fields = ['proficiency', 'acquired', 'characterskill']
+        widgets = {'characterskill': HiddenInput()}
 
 
 class CharacterAttributeForm(ModelForm):
     class Meta:
         model = CharacterAttribute
-        fields = ['points']
+        fields = ['attribute', 'points']
 
 
 class CharacterFlawForm(ModelForm):
     class Meta:
         model = CharacterFlaw
-        fields = ['flaw', 'points']
+        fields = ['flaw', 'points', 'character', 'notes']
+        widgets = {'character': HiddenInput(),
+                   'notes': Textarea()}
 
 
 class CharacterSchtickForm(ModelForm):
     class Meta:
         model = CharacterSchtick
-        fields = ['schtick', 'points']
+        fields = ['schtick', 'points', 'character', 'notes']
+        widgets = {'character': HiddenInput(),
+                   'notes': Textarea()}
 
-CharacterSkillFormset = modelformset_factory(CharacterSkill, fields = ['skill', 'points'], extra=1)
-CharacterProficiencyFormset = modelformset_factory(CharacterProficiency, fields = ['proficiency', 'acquired'], extra=1)
-CharacterAttributeFormset = modelformset_factory(CharacterAttribute, fields = ['attribute', 'points'], extra=1)
-CharacterSchtickFormset = modelformset_factory(CharacterSchtick, fields = ['schtick', 'points'], extra=1)
-CharacterFlawFormset = modelformset_factory(CharacterFlaw, fields = ['flaw', 'points'], extra=1)
+
+CharacterProficiencyFormset = inlineformset_factory(CharacterSkill, CharacterProficiency, form=CharacterProficiencyForm, extra=1)
+CharacterSkillFormset = inlineformset_factory(Character, CharacterSkill, extra=1, form=CharacterSkillForm)
+CharacterAttributeFormset = inlineformset_factory(Character, CharacterAttribute, form=CharacterAttributeForm, extra=1)
+CharacterSchtickFormset = inlineformset_factory(Character, CharacterSchtick, form=CharacterSchtickForm, extra=1)
+CharacterFlawFormset = inlineformset_factory(Character, CharacterFlaw, form=CharacterFlawForm, extra=1)

@@ -5,77 +5,17 @@
 {% endblock head %}
 
 {% block content%}
+<div class="main"></div>
 <div class="container">
-<div class="row"><form id="{{object.pk}}" class="form-inline">
-{{form}}
+<form id="character" class="card row" action="/characters/{{object.pk}}/" method="post">
+{% csrf_token %}
+<div class="form-group card-body">
+    {% for field in form %}
+        <div>{{ field.label }}{{field}}</div>
+    {%  endfor %}
+        <input type='hidden' id='id_form{{form.id}}' name='form{{form.id}}' value='{{form.id}}' />
+    <input type="submit" class="btn btn-primary" value="Submit">
+</div>
 </form>
 </div>
-<form id="attribute_{{object.pk}}" class="row">
-{% for form in character_attribute_form %}
-<div class="form-inline col-sm-4">
-{% for field in form %}
-{% if not field.is_hidden %}
-<div>{{field}}</div>
-{% endif %}
-{% endfor %}
-</div>
-{% endfor %}
-<input type="submit" class="btn btn-info" value="Submit">
-</form>
-{{skill}}
-<div class="row">
-<form id="skill_{{object.pk}}" class="row">
-{% for form in skill.skillform %}
-<div class="form-inline col-sm-4">
-{% for field in form %}
-{% if not field.is_hidden %}
-<div>
-    {{field}}
-</div>
-{% endif %}
-{% endfor %}
-</div>
-{% endfor %}
-<input type="submit" class="btn btn-info" value="Submit">
-</form></div>
-
-<div class="row">
-<form id="character_proficiency_{{object.pk}}" class="form-inline">
-{% for form in character_proficency_form %}
-
-{% for field in form %}
-<div class="col-sm-3">{{field.label}}</div>
-<div class="col-sm-1">{{field}}</div>
-</div>
-{% endfor %}
-{% endfor %}
-<input type="submit" class="btn btn-info" value="Submit">
-</form></div>
-
-<div class="row">
-<form id="character_schtick_{{object.pk}}" class="form form-inline">
-{% for form in character_schtick_form %}
-{% for field in form %}
-<div class="col-sm-3">{{field.label}}</div>
-<div class="col-sm-1">{{field}}</div>
-</div>
-{% endfor %}
-{% endfor %}
-<input type="submit" class="btn btn-info" value="Submit">
-</form></div>
-
-<div class="row">
-<form id="character_flaw_{{object.pk}}" class="form form-inline">
-{% for form in character_flaw_form %}
-{% for field in form %}
-<div class="form-inline">
-<div class="col-sm-3">{{field.label}}</div>
-<div class="col-sm-1">{{field}}</div>
-</div>
-{% endfor %}
-{% endfor %}
-<input type="submit" class="btn btn-info" value="Submit">
-</form></div>
-
-</form>
 {% endblock content%}

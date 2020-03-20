@@ -12,7 +12,7 @@ class Character(models.Model):
 
     name = models.CharField('Name', max_length=120)
     points = models.PositiveIntegerField('Points', null=True, blank=True)
-    notes = models.CharField('Notes', max_length=120, null=True, blank=True)
+    notes = models.TextField('Notes', null=True, blank=True)
 
 
 class CharacterSchtick(models.Model):
@@ -24,6 +24,7 @@ class CharacterSchtick(models.Model):
     def __str__(self):
         return self.schtick.name + " " + str(self.points)
 
+
 class CharacterFlaw(models.Model):
     character = models.ForeignKey(Character, on_delete=models.PROTECT)
     flaw = models.ForeignKey(Flaw, on_delete=models.PROTECT)
@@ -32,6 +33,7 @@ class CharacterFlaw(models.Model):
 
     def __str__(self):
         return self.flaw.name + " " + str(self.points)
+
 
 class CharacterAttribute(models.Model):
     character = models.ForeignKey(Character, on_delete=models.PROTECT)
@@ -50,16 +52,17 @@ class CharacterSkill(models.Model):
     notes = models.CharField('Notes', max_length=120, null=True, blank=True)
 
     def __str__(self):
-        return self.skill.name + " " + str(self.points)
+        return self.character.name + " " + self.skill.name + " " + str(self.points)
+
 
 class CharacterProficiency(models.Model):
     class Meta:
         verbose_name_plural = "Proficiencies"
 
-    character = models.ForeignKey(Character, on_delete=models.PROTECT)
+    characterskill = models.ForeignKey(CharacterSkill, on_delete=models.PROTECT)
     proficiency = models.ForeignKey(Proficiency, on_delete=models.PROTECT)
     acquired = models.BooleanField()
     notes = models.CharField('Notes', max_length=120, null=True, blank=True)
 
     def __str__(self):
-        return self.proficiency.name + " " + str(self.acquired)
+        return self.characterskill.character.name + " " + self.proficiency.name + " " + str(self.acquired)

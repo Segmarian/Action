@@ -1,15 +1,16 @@
 {% extends base.html %}
-{% block content%}
+{% block content %}
 aaa
 <div class="container"
-<div class="row">{% for form in object.form %}
-{{form}}</div></div>
-{% else %}
-{% for object in object_list %}
-<div>
-<a href="/characters/{{object.pk}}/">{{ object.name }}</a>
-</div>
-{% empty %}
-{% endfor %}
-{% endif %}
-{% end block content%}
+<div class="row">
+    {% for form in object.form %}
+        {{form}}</div></div>
+        {% for object in object_list %}
+            <div>
+                <a href="/characters/{{object.pk}}/">{{ object.name }}</a>
+            </div>
+            <div></div>
+            {% empty %}
+        {% endfor %}
+    {% endfor %}
+{% endblock content %}

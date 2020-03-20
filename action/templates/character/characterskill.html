@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% load action_tags %}
+
+{% block head %}
+    {{ filter.form.media.css }}
+{% endblock head %}
+
+{% block menu-inline %}
+    <li class="nav-item base">
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#demo">
+            <h5>Character</h5>
+        </button>
+    </li>
+    <li class="nav-item base">
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#demo2">
+            <h5>Attributes</h5>
+        </button>
+    </li>
+    <li class="nav-item base">
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#demo3">
+            <h5>Skills</h5>
+        </button>
+    </li>
+    <li class="nav-item base">
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#demo4">
+            <h5>Schticks</h5>
+        </button>
+    </li>
+    <li class="nav-item base">
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#demo5">
+            <h5>Flaws</h5>
+        </button>
+    </li>
+
+{% endblock menu-inline %}
+{% block content %}
+<form id="character" action="/characters/{{ object.pk }}/skill/" method="post">
+    <div class="main"></div>
+    <div class="container">
+        <div id="demo" class="collapse card card-body row">
+                {% csrf_token %}
+                <div class="form-group card-body">
+                    {% for field in form %}
+                        <div>{{ field.label }}{{ field }}</div>
+                    {% endfor %}
+                    <input type='hidden' id='id_form{{ form.id }}' name='form{{ form.id }}' value='{{ form.id }}'/>
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+        </div>
+        <div id="demo2" class="card collapse">
+            <div  class="card-body row">
+                {{ character_attribute_formset.management_form }}
+                {% for form in character_attribute_formset %}
+                    <div class="form-inline col-sm-4" style="margin-bottom:20px">
+                        {% for field in form %}
+                            {% if field.label == "Attribute" %}
+                                <div class="col-sm-5">{{ field }}</div>
+                            {% else %}
+                                {% if not field.is_hidden %}
+                                    <div class="col-3">
+                                        <div class="float-left">{{ field }}</div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-3">{{ field }}</div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        <input type='hidden' id='id_form{{ form.id }}' name='form{{ form.id }}' value='{{ form.id }}'/>
+                    </div>
+                {% endfor %}
+                <div class="row card-body">
+                    <input type="submit" name="character_attribute" class="btn btn-primary" value="Submit">
+                </div>
+            </div>
+        </div>
+
+        <div id="demo3" class="card collapse">
+                <div class="form-group card-body">
+                    {{ character_skill_formset.management_form }}
+                    {% for charform in character_skill_formset %}
+                        <div class="form-inline row" style="margin-bottom:20px">
+                            <div class="col">
+                                {% if charform.id.initial == None %}
+                                    {% for field in charform %}
+                                        {% if field.name != "DELETE" %}
+                                            {{ field }}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% for field in charform %}
+                                        {% if field.name == "skill" %}
+                                            {{ field.form.instance.skill.name }}
+                                            {{ field }}
+                                        {% else %}
+                                            {{ field }}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-inline row" style="margin-bottom:20px">
+                            {% for key in character_proficiency_formsets %}
+                                {% if key == charform.instance %}
+                                    {% with character_proficiency_formsets|get_item:key as pformset %}
+                                        {{ pformset.management_form }}
+                                        {% for pform in pformset %}
+                                            <div class="col-sm-4">
+                                                {% if pform.id.initial == None %}
+                                                    {% for field in pform %}
+                                                        {% if field.name != "DELETE" %}
+                                                            {{ field }}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {% for field in pform %}
+                                                        {% if field.name == "proficiency" %}
+                                                            {{ field.form.instance.proficiency.name }}
+                                                        {% elif field.name == "DELETE" %}
+                                                        {% else %}
+                                                            {{ field }}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                    {% endwith %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <hr>
+                    {% endfor %}
+                </div>
+                <div class="row card-body">
+                    <input type="submit" name="character_skill" class="btn btn-primary" value="Submit">
+                </div>
+        </div>
+        <div id="demo4" class="card collapse">
+            <div class="form-group card-body">
+                {{ character_schtick_formset.management_form }}
+                {% for form in character_schtick_formset %}
+                    <div class="form-inline" style="margin-bottom:20px">
+                        {% for field in form %}
+                            {% if field.label == "Schtick" %}
+                                <div class="col-sm-5">{{ field }}</div>
+                            {% else %}
+                                {% if not field.is_hidden %}
+                                    <div class="col-3">
+                                        <div class="float-left">{{ field }}</div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-3">{{ field }}</div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        <input type='hidden' id='id_form{{ form.id }}' name='form{{ form.id }}' value='{{ form.id }}'/>
+                    </div>
+                {% endfor %}
+                <div class="row card-body">
+                    <input type="submit" name="character_attribute" class="btn btn-primary" value="Submit">
+                </div>
+            </div>
+        </div>
+            <div id="demo5" class="card collapse">
+                 <div class="form-group card-body">
+                {{ character_flaw_formset.management_form }}
+                {% for form in character_flaw_formset %}
+                    <div class="row form-group" style="margin-bottom:20px">
+                        {% for field in form %}
+                            {% if field.label == "Flaw" %}
+                                <div class="col-sm-5">{{ field }}</div>
+                            {% else %}
+                                {% if field.label == "Notes" %}
+                                    <div class="row">{{ field }}</div>
+                                {% else %}
+                                    {% if not field.is_hidden %}
+                                        <div class="col-3">
+                                            <div class="float-left">{{ field.label }}{{ field }}</div>
+                                        </div>
+                                    {% else %}
+                                        <div>{{ field }}</div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {{ form.instance.flaw.description }}
+                        <input type='hidden' id='id_form{{ form.id }}' name='form{{ form.id }}' value='{{ form.id }}'/>
+                    </div>
+                {% endfor %}
+                <div class="row card-body">
+                    <input type="submit" name="character_attribute" class="btn btn-primary" value="Submit">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock content %}
+
+{% comment %}
+    {% for formset in character_proficiency_form  %}
+        <div class="form-inline row" style="margin-bottom:20px">
+        {%  if formset|classname == 'CharacterSkillForm' %}
+            {{ formset }}
+        {%  else %}
+        {% for form in formset %}
+            {%  for field in form %}
+            {% if field.label == "Skill" %}
+                <div class="col">{{ field }}</div>
+            {%  else %}
+                {% if not field.is_hidden %}
+                    <div class="col"><div class="float-left">{{field}}</div></div>
+                    {% else %}
+                    <div>{{field}}</div>
+                {% endif %}
+
+            {%  endif %}
+            {%  endfor  %}
+        {% endfor %}
+        {%  endif %}
+        </div>
+        <input type='hidden' id='id_form{{form.id}}' name='form{{form.id}}' value='{{form.id}}' />
+    {% endfor %}
+{%  endcomment %}
