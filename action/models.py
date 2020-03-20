@@ -102,8 +102,8 @@ class SchtickMod(ValuePair):
         return self.linked_schtick.name + "mod"
 
     linked_schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT)
-    multiplier = models.BooleanField(blank=True, null=True)
-    divisor = models.BooleanField(blank=True, null=True)
+    multiplier = models.BooleanField(blank=True)
+    divisor = models.BooleanField(blank=True)
 
 
 class Flaw(ValuePair):
