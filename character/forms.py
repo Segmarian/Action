@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.forms import ModelForm, IntegerField, formset_factory, modelformset_factory, BooleanField, \
     inlineformset_factory, CharField
 
+from action.models import CharacterClass
 from character.models import Character, CharacterSkill, CharacterProficiency, CharacterAttribute, CharacterFlaw, \
     CharacterSchtick
 
@@ -49,18 +50,46 @@ class CharacterFlawForm(ModelForm):
     class Meta:
         model = CharacterFlaw
         fields = ['flaw', 'points', 'character', 'notes']
-        widgets = {'character': HiddenInput(),
-                   'notes': Textarea()}
+        widgets = {'character': HiddenInput(),}
 
 
 class CharacterSchtickForm(ModelForm):
     class Meta:
         model = CharacterSchtick
         fields = ['schtick', 'points', 'character', 'notes']
-        widgets = {'character': HiddenInput(),
-                   'notes': Textarea()}
+        widgets = {'character': HiddenInput(),}
 
 
+class CharacterClassForm(ModelForm):
+    class Meta:
+        model = CharacterClass
+        fields = '__all__'
+
+
+class ClassEntryForm(ModelForm):
+    class Meta:
+        model = ClassEntry
+        fields = '__all__'
+
+
+class CharacterClassForm(ModelForm):
+    class Meta:
+        model = CharacterCharacterClass
+        fields = ['character', 'characterclass']
+        widgets = {'character': HiddenInput()}
+
+
+class CharacterClassentryForm(ModelForm):
+    class Meta:
+        model = CharacterClassEntry
+        fields = ['character', 'classentry']
+        widgets = {'character': HiddenInput()}
+
+
+CharacterClassFormset = inlineformset_factory(Character, CharacterCharacterClass, extra=1,
+                                              form=CharacterClassForm)
+CharacterClassentryFormset = inlineformset_factory(Character, CharacterClassEntry, extra=1,
+                                                   form=CharacterClassentryForm)
 CharacterProficiencyFormset = inlineformset_factory(CharacterSkill, CharacterProficiency, form=CharacterProficiencyForm, extra=1)
 CharacterSkillFormset = inlineformset_factory(Character, CharacterSkill, extra=1, form=CharacterSkillForm)
 CharacterAttributeFormset = inlineformset_factory(Character, CharacterAttribute, form=CharacterAttributeForm, extra=1)

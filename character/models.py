@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-from action.models import Attribute, Skill, Flaw, Proficiency, Schtick
+from action.models import Attribute, Skill, Flaw, Proficiency, Schtick, ClassEntry, CharacterClass
 
 
 class Character(models.Model):
@@ -57,7 +57,7 @@ class CharacterSkill(models.Model):
 
 class CharacterProficiency(models.Model):
     class Meta:
-        verbose_name_plural = "Proficiencies"
+        verbose_name_plural = "Character Proficiencies"
 
     characterskill = models.ForeignKey(CharacterSkill, on_delete=models.PROTECT)
     proficiency = models.ForeignKey(Proficiency, on_delete=models.PROTECT)
@@ -66,3 +66,20 @@ class CharacterProficiency(models.Model):
 
     def __str__(self):
         return self.characterskill.character.name + " " + self.proficiency.name + " " + str(self.acquired)
+
+
+class CharacterCharacterClass(models.Model):
+    character = models.ForeignKey(Character, on_delete=models.PROTECT)
+    characterclass = models.ForeignKey(CharacterClass, on_delete=models.PROTECT)
+    level = models.CharField('Level', max_length=120)
+
+    def __str__(self):
+        return self.character.name + " " + self.characterclass.name + " " + self.level
+
+
+class CharacterClassEntry(models.Model):
+    character = models.ForeignKey(Character, on_delete=models.PROTECT)
+    classentry = models.ForeignKey(ClassEntry, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.character.name + " " + str(self.classentry)
