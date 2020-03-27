@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.db.models import Count
+from django.forms import ChoiceField
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, UpdateView, FormView
@@ -76,8 +78,9 @@ class CharacterSkillView (UpdateView):
         for characterclass in CharacterCharacterClass.objects.filter(character=self.object):
             classentry_formsets[characterclass] = CharacterClassentryFormset(request.POST,
                                                                                instance=characterclass,
-                                                                               prefix=characterclass.characterclass.name)
-        if self.form_valid(form, attribute_formset, skill_formset, proficiency_formsets, schtick_formset, flaw_formset):
+                                                                               prefix=characterclass)
+        if self.form_valid(form, attribute_formset, skill_formset, proficiency_formsets, schtick_formset, flaw_formset,
+                           characterclass_formset, classentry_formsets):
             return self.form_valid(form,
                                    attribute_formset,
                                    skill_formset,
@@ -128,7 +131,11 @@ class CharacterSkillView (UpdateView):
             for character_class in CharacterCharacterClass.objects.filter(character=context['character']):
                 context['character_classentry_formsets'][character_class] = CharacterClassentryFormset(self.request.POST,
                                                                                  instance=character_class,
-                                                                                 prefix=character_class.characterclass.name)
+                                                                                 prefix=character_class)
+                for csform in context['character_classentry_formsets'][character_class]:
+                    csform.fields['classentry'].queryset = \
+                        ClassEntry.objects.filter(characterclass=character_class.characterclass,
+                                                  level_startswith=character_class.level)
         else:
             context['form'] = CharacterDetailForm(instance=context['character'])
             context['character_attribute_formset'] = CharacterAttributeFormset(instance=context['character'],
@@ -150,7 +157,11 @@ class CharacterSkillView (UpdateView):
             context['character_classentry_formsets']={}
             for character_class in CharacterCharacterClass.objects.filter(character=context['character']):
                 context['character_classentry_formsets'][character_class] = \
-                    CharacterClassentryFormset(instance=self.object, prefix=character_class.characterclass.name)
+                    CharacterClassentryFormset(instance=character_class, prefix=character_class)
+                for csform in context['character_classentry_formsets'][character_class]:
+                    csform.fields['classentry'].queryset = \
+                        ClassEntry.objects.filter(characterclass=character_class.characterclass,
+                                                  level__startswith=character_class.level)
 
         return context
 
@@ -181,13 +192,14 @@ class CharacterSkillView (UpdateView):
             valid = True
             flaw_formset.save()
         if characterclass_formset.is_valid():
-            valid=True
+            valid = True
             characterclass_formset.save()
         for characterclass in CharacterCharacterClass.objects.filter(character=self.object):
-            cef = classentry_formsets[characterclass]
-            if cef.is_valid():
-                valid = True
-                cef.save()
+            if characterclass.characterclassentry_set is None:
+                cef = classentry_formsets[characterclass]
+                if cef.is_valid():
+                    valid = True
+                    cef.save()
         if valid:
             return HttpResponseRedirect(self.get_success_url())
         else:

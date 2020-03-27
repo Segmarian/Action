@@ -7,7 +7,7 @@ from character.models import Character, CharacterSkill, CharacterProficiency, Ch
     CharacterSchtick
 
 from django.forms import CheckboxSelectMultiple, Textarea, TextInput, NumberInput, HiddenInput, ChoiceField, \
-    BaseInlineFormSet
+    BaseInlineFormSet, ModelChoiceField, Select
 
 from character.models import *
 
@@ -57,40 +57,52 @@ class CharacterSchtickForm(ModelForm):
     class Meta:
         model = CharacterSchtick
         fields = ['schtick', 'points', 'character', 'notes']
-        widgets = {'character': HiddenInput(),}
+        widgets = {'character': HiddenInput()}
 
+    schtick = ModelChoiceField(queryset=Schtick.objects.exclude(type=4).order_by('type__name'))
 
 class CharacterClassForm(ModelForm):
     class Meta:
         model = CharacterClass
         fields = '__all__'
+        widgets = {'level': Select()}
+
+
+class ClassEntryChoiceField(ModelChoiceField):
+    def label_from_instance(self, obj):
+        return self.classentry.schtick
 
 
 class ClassEntryForm(ModelForm):
     class Meta:
         model = ClassEntry
         fields = '__all__'
+        classentry = ClassEntryChoiceField(queryset=ClassEntry.objects.all(),
+                                           to_field_name="classentry")
+        level = ChoiceField()
 
 
 class CharacterClassForm(ModelForm):
     class Meta:
         model = CharacterCharacterClass
-        fields = ['character', 'characterclass']
+        fields = ['character', 'characterclass', 'level']
         widgets = {'character': HiddenInput()}
 
 
 class CharacterClassentryForm(ModelForm):
     class Meta:
         model = CharacterClassEntry
-        fields = ['character', 'classentry']
-        widgets = {'character': HiddenInput()}
+        fields = ['character_characterclass', 'classentry', 'notes']
+        widgets = {'character_characterclass': HiddenInput(),
+                   'classentry': Select(attrs={'class': 'col-sm-12'})}
 
 
 CharacterClassFormset = inlineformset_factory(Character, CharacterCharacterClass, extra=1,
                                               form=CharacterClassForm)
-CharacterClassentryFormset = inlineformset_factory(Character, CharacterClassEntry, extra=1,
+CharacterClassentryFormset = inlineformset_factory(CharacterCharacterClass, CharacterClassEntry, extra=1,
                                                    form=CharacterClassentryForm)
-CharacterProficiencyFormset = inlineformset_factory(CharacterSkill, CharacterProficiency, form=CharacterProficiencyForm, extra=1)
+CharacterProficiencyFormset = inlineformset_factory(CharacterSkill, CharacterProficiency, form=CharacterProficiencyForm,
+                                                    extra=1)
 CharacterSkillFormset = inlineformset_factory(Character, CharacterSkill, extra=1, form=CharacterSkillForm)
 CharacterAttributeFormset = inlineformset_factory(Character, CharacterAttribute, form=CharacterAttributeForm, extra=1)
 CharacterSchtickFormset = inlineformset_factory(Character, CharacterSchtick, form=CharacterSchtickForm, extra=1)

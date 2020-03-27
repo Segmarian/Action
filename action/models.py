@@ -97,20 +97,20 @@ class ValuePair(models.Model):
                                              related_name="pv_calculated_attribute")
 
 
-class SchtickMod(ValuePair):
-    def __str__(self):
-        return self.linked_schtick.name + "mod"
-
-    linked_schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT)
-    multiplier = models.BooleanField(blank=True)
-    divisor = models.BooleanField(blank=True)
-
-
 class Flaw(ValuePair):
     name = models.CharField('Name', max_length=120)
     description = models.CharField('Description', max_length=120, blank=True, null=True)
 
     def __str__(self):
+        class SchtickMod(ValuePair):
+            def __str__(self):
+                return self.linked_schtick.name + "mod"
+
+            linked_schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT)
+            linked_flaw = models.ForeignKey(Flaw, on_delete=models.PROTECT)
+            multiplier = models.BooleanField(blank=True)
+            divisor = models.BooleanField(blank=True)
+
         return str(self.name) + " " + str(self.value)
 
 
@@ -126,6 +126,16 @@ class Prereq(ValuePair):
         if self.schtick:
             result += self.schtick.name
         return result
+
+
+class SchtickMod(ValuePair):
+    def __str__(self):
+        return self.linked_schtick.name + "mod"
+
+    linked_schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT, null=True, blank=True)
+    linked_flaw = models.ForeignKey(Flaw, on_delete=models.PROTECT, null=True, blank=True)
+    multiplier = models.BooleanField(blank=True)
+    divisor = models.BooleanField(blank=True)
 
 
 class Modifier(ValuePair):
@@ -174,9 +184,7 @@ class ClassEntry(models.Model):
         if self.flaw:
             flaw = str(self.flaw.name)
             flawcost = str(self.flaw.value)
-        return self.characterclass.name + ":" + \
-            self.level + ":" + \
-            schtick + flaw + \
+        return schtick + flaw + \
             notes + " (" + schtickcost + flawcost + ")"
     characterclass = models.ForeignKey(CharacterClass, on_delete=models.PROTECT)
     level = models.CharField('Level', max_length=120)

@@ -71,15 +71,18 @@ class CharacterProficiency(models.Model):
 class CharacterCharacterClass(models.Model):
     character = models.ForeignKey(Character, on_delete=models.PROTECT)
     characterclass = models.ForeignKey(CharacterClass, on_delete=models.PROTECT)
-    level = models.CharField('Level', max_length=120)
+    level = models.CharField('Level', max_length=120, choices={('Basic', 'Basic'),
+                                                               ('Heroic','Heroic'),
+                                                               ('Epic','Epic')})
 
     def __str__(self):
         return self.character.name + " " + self.characterclass.name + " " + self.level
 
 
 class CharacterClassEntry(models.Model):
-    character = models.ForeignKey(Character, on_delete=models.PROTECT)
+    character_characterclass = models.ForeignKey(CharacterCharacterClass, on_delete=models.PROTECT)
     classentry = models.ForeignKey(ClassEntry, on_delete=models.PROTECT)
+    notes = models.CharField('Notes', max_length=120, null=True, blank=True)
 
     def __str__(self):
-        return self.character.name + " " + str(self.classentry)
+        return str(self.character_characterclass) + " " + str(self.classentry)
