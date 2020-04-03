@@ -102,7 +102,8 @@ class Character(models.Model):
         attrxp = attrset.aggregate(models.Sum('points'))['points__sum'] or 0
         attrxp = attrxp - (attrset.count() or 0)*5
         charskills = CharacterSkill.objects.filter(character=self)
-        skillxp = (charskills.aggregate(models.Sum('points'))['points__sum'] or 0) - (charskills.count() or 0)*10
+        skillxp = (charskills.aggregate(models.Sum('points'))['points__sum'] or 0)
+        skillxp = skillxp-charskills.filter(points__gt=0).count()*10
         profxp = CharacterProficiency.objects.filter(characterskill__in=charskills, acquired=True).count()
         charschticks = CharacterSchtick.objects.filter(character=self)
         schtickxp = charschticks.aggregate(models.Sum('points'))['points__sum'] or 0
