@@ -1,33 +1,47 @@
 {% extends "base.html" %}
+{% load action_tags %}
 
 {% block head %}
     {{ filter.form.media.css }}
 {% endblock head %}
+
+{% block menu-inline %}
+        <li class="nav-item base">
+                    <h5>
+                        <a class="nav-link" href="{% url 'charactercreate' %}">Create new</a>
+                    </h5>
+        </li>
+{%  endblock menu-inline %}
 
 {% block content %}
     <div class="main"></div>
     <div class="main"></div>
     <table class="table">
         <thead class="table">
-        <tr>
-            <th class="table">
+        <tr scope="row">
+            <th scope="col">
                 Name
             </th>
-            <th class="table">
+            <th scope="col">
                 Points
             </th>
         </tr>
         </thead>
         <tbody>
             {% for object in object_list %}
-                <tr>
-                    <td class="table">
-                        <a href="/characters/{{object.pk}}/skill">{{ object.name }}</a>
+                <tr scope="row">
+                    <td>
+                        <a href="{%  url 'characterdetail' object.pk %}">{{ object.name }}</a>
                     </td>
-                    <td class="table">
-                        {{ object.points }}
+                    <td>
+                        <span class=" badge badge-primary">Attribute: {{ object.xp.attribute }}</span>
+                        <span class=" badge badge-primary">Skill: {{ object.xp.skill}}</span>
+                        <span class=" badge badge-primary">Schtick: {{ object.xp.schtick }}</span>
+                        <span class=" badge badge-primary">Class: {{ object.xp.class }}</span>
+                        <span class=" badge badge-warning">Flaw: {{ object.xp.flaw }}</span>
                     </td>
-                </tr>
+                    <td>
+                        {{ object.points }} / {{ object.xp.total }}
             {% endfor %}
         </tbody>
     </table>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load action_tags %}
+
+{% block head %}
+    {{ filter.form.media.css }}
+{% endblock head %}
+
+{% block content %}
+<form id="character" action="{% url 'charactercreate' %}" method="post">
+    <div class="main"></div>
+    <div class="container">
+        <div id="demo" class="collapse card card-body row show">
+            {% csrf_token %}
+            <div class="form-group card-body">
+                {% for field in form %}
+                    <div>{{ field.label }}{{ field }}</div>
+                {% endfor %}
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock content %}

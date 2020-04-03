@@ -1,6 +1,6 @@
 @media screen and (max-width:768px) {
-body{
-    padding-top: 5rem;
+    body{
+        padding-top: 5rem;
     }
 }
 
@@ -12,19 +12,19 @@ body{
 }
 
 body {
-font-family: Garamond, serif;
-font-size: 18px;
-background-color: rgba(255, 212, 0, 0.1);
-margin-bottom: 3cm;
-border-color: #FFAA00;
-color: #AA5500;
+    font-family: Garamond, serif;
+    font-size: 18px;
+    background-color: rgba(255, 212, 0, 0.1);
+    margin-bottom: 3cm;
+    border-color: #FFAA00;
+    color: #AA5500;
 }
 
 body.print{
     color: #000;
     background-color: #000;
     border-color: #000;
-   }
+}
 
 .icon {
 }
@@ -45,28 +45,28 @@ body.print{
 */
 
 nav{
-background-color: rgba(255, 170, 0, 0.5);
-border-color: #FA9700;
-padding-top: 2em;
+    background-color: rgba(255, 170, 0, 0.5);
+    border-color: #FA9700;
+    padding-top: 2em;
 }
 
 .nav-pills{
-border-color: rgba(255, 170, 0, 0.1);
+    border-color: rgba(255, 170, 0, 0.1);
 }
 
 .nav-item{
-margin: 10px;
+    margin: 10px;
 }
 
 nav>div>ul>li{
-background-color: rgba(255, 170, 0, 1);
-border-color: rgba(255, 170, 0, 1);
-border-radius: 8px;
+    background-color: rgba(255, 170, 0, 1);
+    border-color: rgba(255, 170, 0, 1);
+    border-radius: 8px;
 }
 
 nav>div>ul>li:hover, nav>div>ul>li:hover>h5>a, a:hover{
-background-color: rgba(170, 85, 0, 1);
-border-color: rgba(170, 85, 0, 1);
+    background-color: rgba(170, 85, 0, 1);
+    border-color: rgba(170, 85, 0, 1);
 }
 
 /*
@@ -76,44 +76,45 @@ padding-top: 10px;
 */
 
 .alert-success{
-margin-top: 70px;
+    margin-top: 70px;
 }
 
 .form-control{
-background-color: rgba(255, 212, 170, 0.1);
-border: 1px solid #FA9700;
-color: #AA5500;
+    background-color: rgba(255, 212, 170, 0.1);
+    border: 1px solid #FA9700;
+    color: #AA5500;
 }
 
 .form-inline label {
-justify-content: left;
+    justify-content: left;
 }
 
 .badge-primary{
-background-color: rgba(255, 170, 0, 1);
-padding: 5px;
-margin-top: 0px;
+    background-color: rgba(255, 170, 0, 1);
+    color: black;
+    padding: 5px;
+    margin-top: 0px;
 }
 
 .badge-primary-small{
-padding: 0px;
-margin-top: 0px;
+    padding: 0px;
+    margin-top: 0px;
 }
 
 
 .label-base{
-line-height: 1.4;
-margin-bottom: 5px;
+    line-height: 1.4;
+    margin-bottom: 5px;
 }
 
 .label-tag-header{
-margin-top: 0px;
-margin-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .label-tag{
-margin-left: 0px;
-margin-right: 5px;
+    margin-left: 0px;
+    margin-right: 5px;
 }
 
 select option {
@@ -123,52 +124,52 @@ select option {
 }
 
 .form-control:focus{
-background-color: rgba(255, 212, 170, 0.1);
-color:#000;
-border-color: #FA9700;
-box-shadow: inset 0 2px 2px rgba(0,0,0,.075), 0 0 16px rgba(255, 212, 170, .6);
+    background-color: rgba(255, 212, 170, 0.1);
+    color:#000;
+    border-color: #FA9700;
+    box-shadow: inset 0 2px 2px rgba(0,0,0,.075), 0 0 16px rgba(255, 212, 170, .6);
 }
 
 input:hover>.btn{
-background-color: rgba(255, 170, 0, 1);
+    background-color: rgba(255, 170, 0, 1);
 }
 
 a, .btn-primary, .btn-submit:hover {
-font-size: 1rem;
-color: rgba(170, 85, 0, 1);
-background-color: rgba(255, 170, 0, 1);
-border-color: rgba(255, 170, 0, 1);
+    font-size: 1rem;
+    color: rgba(170, 85, 0, 1);
+    background-color: rgba(255, 170, 0, 1);
+    border-color: rgba(255, 170, 0, 1);
 }
 
 a:hover, li:hover > h5 > a , li > h3 > div:hover, div:hover > a, div> a:hover>span.glyphicon, button, button:hover>a, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
-text-decoration:none;
-background-color: rgba(170, 85, 0, 1);
-color: rgba(255, 255, 170, 1);
-border-color: #FA9700;
+    text-decoration:none;
+    background-color: rgba(170, 85, 0, 1);
+    color: rgba(255, 255, 170, 1);
+    border-color: #FA9700;
 }
 
 th>a{
-min-width:24px;
-max-width:24px;
+    min-width:24px;
+    max-width:24px;
 }
 
 td>a , th>a{
-background-color: rgba(255, 212, 0, 0);
-color: rgba(170, 85, 0, 1);
-border-color: #FA9700;
-padding: 3px;
-border-radius: 3px;
+    background-color: rgba(255, 212, 0, 0);
+    color: rgba(170, 85, 0, 1);
+    border-color: #FA9700;
+    padding: 3px;
+    border-radius: 3px;
 }
 
 
 .nav>li>a:hover, td>a:hover{
-background-color: rgba(255, 170, 0, 1);
-color: rgba(255, 255, 170, 1);
-border-color: #FA9700;
+    background-color: rgba(255, 170, 0, 1);
+    color: rgba(255, 255, 170, 1);
+    border-color: #FA9700;
 }
 
 .main{
-padding: 70px 3rem 0rem 3rem !important;
+    padding: 70px 3rem 0rem 3rem !important;
 }
 
 /*
@@ -184,47 +185,47 @@ background-color: rgba(255, 212, 85, 0.1);
 */
 
 .popover, .popover-body{
-justify-content: left;
+    justify-content: left;
 }
 
 .btn{
-transition: None;
+    transition: None;
 }
 
 .blank{
-background-color: transparent;
+    background-color: transparent;
 
 }
 
 .blank:hover, .blank:active{
-background-color: transparent;
-color: rgba(170, 85, 0, 1);
+    background-color: transparent;
+    color: rgba(170, 85, 0, 1);
 }
 
 a .oi{
-background-color : transparent;
+    background-color : transparent;
 }
 
 .charmlist, a .charmlist , .charmlist a{
-font-size: 1.125rem;
-font-weight: 700;
-background-color: transparent;
-color: rgba(170, 85, 0, 1);
+    font-size: 1.125rem;
+    font-weight: 700;
+    background-color: transparent;
+    color: rgba(170, 85, 0, 1);
 }
 
 span.badge.badge-primary.rounded.charmlist {
-color: rgba(255, 170, 0, 1);
-background-color: rgba(255, 170, 0, 0);
-border-color: rgba(255, 170, 0, 1);
+    color: rgba(255, 170, 0, 1);
+    background-color: rgba(255, 170, 0, 0);
+    border-color: rgba(255, 170, 0, 1);
 }
 
 span.badge.badge-primary.rounded.charmlist:hover, .charmlist :hover,  a .charmlist:hover , .charmlist a:hover{
-color: rgba(170, 85, 0, 1);
-background-color: rgba(255, 185, 0, 1);
- }
+    color: rgba(170, 85, 0, 1);
+    background-color: rgba(255, 185, 0, 1);
+}
 
 .no_border{
-border: none;
+    border: none;
 }
 
 /*
@@ -289,13 +290,13 @@ h4{
 }
 
 @media print {
-  body{
-  }
+    body{
+    }
 }
 
 div.charmprintlist{
     max-width: 90%!important;
-        column-count: 2;
+    column-count: 2;
     -webkit-column-count: 2;
     -moz-column-count: 2;
 

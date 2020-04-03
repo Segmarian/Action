@@ -1,18 +1,10 @@
 from __future__ import unicode_literals
-from django.forms import ModelForm, IntegerField, formset_factory, modelformset_factory, BooleanField, \
-    inlineformset_factory, CharField
-
-from action.models import CharacterClass
-from character.models import Character, CharacterSkill, CharacterProficiency, CharacterAttribute, CharacterFlaw, \
-    CharacterSchtick
-
-from django.forms import CheckboxSelectMultiple, Textarea, TextInput, NumberInput, HiddenInput, ChoiceField, \
-    BaseInlineFormSet, ModelChoiceField, Select
 
 from character.models import *
+from django.forms import *
 
 
-class CharacterDetailForm(ModelForm):
+class CharacterBasicForm(ModelForm):
 
     class Meta:
         model = Character

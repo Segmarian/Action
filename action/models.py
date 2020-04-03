@@ -1,6 +1,48 @@
 from django.db import models
 
 
+class Campaign(models.Model):
+    name = models.CharField('Name', max_length=120)
+    classes = models.BooleanField()
+    notes = models.CharField('Notes', max_length=120, null=True, blank=True)
+    starting_xp = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return self.name
+
+
+class XPprogression(models.Model):
+    class Meta:
+        verbose_name = "XP Progression"
+        verbose_name_plural = "XP Progressions"
+
+    campaign = models.ForeignKey(Campaign, on_delete=models.PROTECT)
+    level = models.PositiveSmallIntegerField()
+    xp = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return self.campaign + " " + self.level + " " + self.xp
+
+
+class NotInCampaign(models.Model):
+
+    def __str__(self):
+        return self.campaign.name + "does not have " + \
+               str(self.attribute.name) + \
+               str(self.schtick.name) + \
+               str(self.skill.name) + \
+               str(self.proficiency.name) + \
+               str(self.flaw.name)
+
+    campaign = models.ForeignKey(Campaign, on_delete=models.PROTECT)
+    schtick_type = models.ForeignKey('SchtickType', on_delete=models.PROTECT)
+    attribute = models.ForeignKey('Attribute', on_delete=models.PROTECT)
+    schtick = models.ForeignKey('Schtick', on_delete=models.PROTECT)
+    skill = models.ForeignKey('Skill', on_delete=models.PROTECT)
+    proficiency = models.ForeignKey('Proficiency', on_delete=models.PROTECT)
+    flaw = models.ForeignKey('Flaw', on_delete=models.PROTECT)
+
+
 class Skill(models.Model):
     name = models.CharField('Name', max_length=120)
     sortorder = models.SmallIntegerField(null=True, blank=True)
@@ -44,15 +86,18 @@ class Schtick(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return self.type.name + ":" + self.name + " (Tier " + str(self.tier) + ")"
+        typstr = ""
+        for typ in self.type.all():
+            typstr += str(typ.name) + " "
+        return typstr + ":" + self.name + " (Tier " + str(self.tier) + ")"
 
     name = models.CharField('Name', max_length=120)
     req = models.ForeignKey("Prereq", on_delete=models.PROTECT,
                             null=True, blank=True, related_name="schtickreq")
-    cost = models.CharField("Cost", max_length=120, null=True, blank=True)
+    cost = models.PositiveSmallIntegerField("Cost", null=True, blank=True)
     description = models.TextField('Description', null=True, blank=True)
     tier = models.PositiveSmallIntegerField("Tier", null=True, blank=True)
-    type = models.ForeignKey("SchtickType", on_delete=models.PROTECT)
+    type = models.ManyToManyField("SchtickType", related_name='schticks')
 
 
 class Tag(models.Model):
@@ -72,6 +117,8 @@ class Advancement(models.Model):
                                    null=True, blank=True)
     req = models.ForeignKey("Prereq", on_delete=models.PROTECT,
                             null=True, blank=True)
+    cost = models.PositiveSmallIntegerField("Points", null=True, blank=True)
+    progression = models.PositiveSmallIntegerField("Progression", null=True, blank=True)
 
 
 class ValuePair(models.Model):
@@ -102,15 +149,6 @@ class Flaw(ValuePair):
     description = models.CharField('Description', max_length=120, blank=True, null=True)
 
     def __str__(self):
-        class SchtickMod(ValuePair):
-            def __str__(self):
-                return self.linked_schtick.name + "mod"
-
-            linked_schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT)
-            linked_flaw = models.ForeignKey(Flaw, on_delete=models.PROTECT)
-            multiplier = models.BooleanField(blank=True)
-            divisor = models.BooleanField(blank=True)
-
         return str(self.name) + " " + str(self.value)
 
 
@@ -160,6 +198,8 @@ class Modifier(ValuePair):
 class CharacterClass(models.Model):
     class Meta:
         verbose_name_plural = "Character classes"
+
+    schtick_list = models.ManyToManyField(SchtickType, related_name="characterclasses")
 
     def __str__(self):
         return str(self.name)

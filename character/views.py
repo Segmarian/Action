@@ -5,11 +5,44 @@ from django.db.models import Count
 from django.forms import ChoiceField
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, UpdateView, FormView
-from character.forms import CharacterSkillFormset, CharacterSchtickFormset, CharacterFlawFormset, \
-    CharacterAttributeFormset, CharacterProficiencyFormset, CharacterSkillForm, CharacterProficiencyForm, \
-    CharacterDetailForm, CharacterAttributeForm, CharacterClassentryFormset, CharacterClassFormset
+from django.views.generic import ListView, UpdateView, FormView, CreateView
+from character.forms import *
 from character.models import *
+
+
+class CharacterCreateView (CreateView):
+    model = Character
+    form_class = CharacterBasicForm
+    template_name = "character/character_basic.html"
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if self.object:
+            for attribute in Attribute.objects.all():
+                ca = CharacterAttribute(
+                    attribute=attribute,
+                    character=self.object,
+                    points=5)
+                ca.save()
+            for skill in Skill.objects.all():
+                cs = CharacterSkill(
+                    skill=skill,
+                    character=self.object,
+                    points=0
+                )
+                cs.save()
+            for characterskill in CharacterSkill.objects.all():
+                for proficiency in Proficiency.objects.filter(skill=characterskill.skill):
+                    cp = CharacterProficiency(
+                        characterskill=characterskill,
+                        proficiency=proficiency,
+                        acquired=False
+                    )
+                    cp.save()
+            return response
+
+    def get_success_url(self):
+        return reverse('characterdetail', kwargs={'pk': self.object.pk})
 
 
 class CharacterListView (ListView):
@@ -17,12 +50,11 @@ class CharacterListView (ListView):
     template_name = "character/character_list.html"
     fields = '__all__'
 
-
-class CharacterUpdateView (UpdateView):
+class CharacterBasicView (UpdateView):
     model = Character
-    form_class = CharacterDetailForm
+    form_class = CharacterBasicForm
     template_name = "character/character_detail.html"
-    success_url = reverse_lazy('character_detail')
+    success_url = reverse_lazy('characterbasic')
 
 
 class CharacterAttributeView (UpdateView):
@@ -32,13 +64,13 @@ class CharacterAttributeView (UpdateView):
     success_url = reverse_lazy('characterattribute')
 
     def get_success_url(self):
-        return reverse_lazy('character_attribute', {"pk": self.object})
+        return reverse_lazy('characterattribute', {"pk": self.object})
 
 
-class CharacterSkillView (UpdateView):
+class CharacterDetailView (UpdateView):
     model = Character
-    form_class = CharacterDetailForm
-    template_name = "character/characterskill.html"
+    form_class = CharacterBasicForm
+    template_name = "character/character_detail.html"
 
     def get(self, request, *args, **kwargs):
         # The Character we're editing:
@@ -53,7 +85,7 @@ class CharacterSkillView (UpdateView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = CharacterDetailForm(request.POST, instance=self.object)
+        form = CharacterBasicForm(request.POST, instance=self.object)
         attribute_formset = CharacterAttributeFormset (request.POST,
                                                        instance=self.object,
                                                        prefix='characterattribute')
@@ -100,10 +132,10 @@ class CharacterSkillView (UpdateView):
                                      classentry_formsets)
 
     def get_context_data(self, **kwargs):
-        context = super(CharacterSkillView, self).get_context_data(**kwargs)
+        context = super(CharacterDetailView, self).get_context_data(**kwargs)
         context['character_proficiency_formsets'] = {}
         if self.request.POST:
-            context['form'] = CharacterDetailForm(self.request.POST, instance=self.object)
+            context['form'] = CharacterBasicForm(self.request.POST, instance=self.object)
             context['character_attribute_formset'] = CharacterAttributeFormset(self.request.POST,
                                                                                instance=self.object,
                                                                                prefix='characterattribute')
@@ -137,7 +169,7 @@ class CharacterSkillView (UpdateView):
                         ClassEntry.objects.filter(characterclass=character_class.characterclass,
                                                   level_startswith=character_class.level)
         else:
-            context['form'] = CharacterDetailForm(instance=context['character'])
+            context['form'] = CharacterBasicForm(instance=context['character'])
             context['character_attribute_formset'] = CharacterAttributeFormset(instance=context['character'],
                                                                                prefix='characterattribute')
             context['character_skill_formset'] = CharacterSkillFormset(instance=context['character'],
@@ -171,24 +203,24 @@ class CharacterSkillView (UpdateView):
         # It should return an HttpResponse.
         self.object = self.get_object()
         valid = False
-        if form.is_valid():
+        if form.has_changed() and form.is_valid():
             valid = True
             form.save()
-        if attribute_formset.is_valid():
+        if attribute_formset.has_changed() and attribute_formset.is_valid():
             valid = True
             attribute_formset.save()
-        if skill_formset.is_valid():
+        if skill_formset.has_changed() and skill_formset.is_valid():
             valid = True
             skill_formset.save()
         for characterskill in CharacterSkill.objects.filter(character=self.object):
             pfc = proficiency_formsets[characterskill]
-            if pfc.is_valid():
+            if pfc.has_changed() and pfc.is_valid():
                 valid = True
                 pfc.save()
-        if schtick_formset.is_valid():
+        if schtick_formset.has_changed() and schtick_formset.is_valid():
             valid = True
             schtick_formset.save()
-        if flaw_formset.is_valid():
+        if flaw_formset.has_changed() and flaw_formset.is_valid():
             valid = True
             flaw_formset.save()
         if characterclass_formset.is_valid():
@@ -210,17 +242,17 @@ class CharacterSkillView (UpdateView):
         return self.render_to_response(self.get_context_data())
 
     def get_success_url(self):
-        return reverse('character_skill', kwargs={'pk': self.object.pk})
+        return reverse('characterdetail', kwargs={'pk': self.object.pk})
 
 
 class CharacterSchtickView (UpdateView):
     model = Character
     form_class = CharacterSchtickFormset
     template_name = "character/characterattribute.html"
-    success_url = reverse_lazy('character_attribute')
+    success_url = reverse_lazy('characterattribute')
 
 
 class CharacterFlawView (FormView):
     form_class = CharacterFlawFormset
     template_name = "character/characterattribute.html"
-    success_url = reverse_lazy('character_flaw')
+    success_url = reverse_lazy('characterflaw')
