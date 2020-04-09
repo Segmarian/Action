@@ -29,7 +29,7 @@ class CharacterProficiencyForm(ModelForm):
     class Meta:
         model = CharacterProficiency
         fields = ['proficiency', 'acquired', 'characterskill']
-        widgets = {'characterskill': HiddenInput()}
+        widgets = {'characterskill': HiddenInput(), 'proficiency': HiddenInput(), 'acquired': CheckboxInput()}
 
 
 class CharacterAttributeForm(ModelForm):

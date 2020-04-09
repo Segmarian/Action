@@ -220,10 +220,10 @@ class ClassEntry(models.Model):
             notes = " " + self.notes
         if self.schtick:
             schtick = str(self.schtick.name)
-            schtickcost = str(self.schtick.cost)
+            schtickcost = str(self.schtick.cost) or 0
         if self.flaw:
             flaw = str(self.flaw.name)
-            flawcost = str(self.flaw.value)
+            flawcost = str(self.flaw.value) or 0
         return schtick + flaw + \
             notes + " (" + schtickcost + flawcost + ")"
     characterclass = models.ForeignKey(CharacterClass, on_delete=models.PROTECT)

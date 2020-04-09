@@ -51,7 +51,8 @@
 
 {% endblock menu-inline %}
 {% block content %}
-    {{ section }}
+    <span>
+    </span>
     <form id="character" action="{% url 'characterdetail' object.pk %}" method="post">
         <div class="main"></div>
         <div class="container">
@@ -104,6 +105,7 @@
                                         {% if field.name == "skill" %}
                                             {{ field.form.instance.skill.name }}
                                             {{ field }}
+                                            {{ field.errors }}
                                         {% else %}
                                             {{ field }}
                                         {% endif %}
@@ -126,7 +128,8 @@
                                                 {% else %}
                                                     {% for field in pform %}
                                                         {% if field.name == "proficiency" %}
-                                                            {{ field.form.instance.proficiency.name }}
+                                                            {{ field.form.instance.proficiency.name }}{{ field }}
+                                                            {{ field.errors }}
                                                         {% elif field.name == "DELETE" %}
                                                         {% else %}
                                                             {{ field }}
@@ -153,7 +156,7 @@
                         <div class="form-inline" style="margin-bottom:20px">
                             {% for field in form %}
                                 {% if field.label == "Schtick" %}
-                                    <div class="col">{{ field }}</div>
+                                    <div class="col">{{ field }}{{ field.errors }}</div>
                                 {% else %}
                                     {% if not field.is_hidden %}
                                         <div class="col">
@@ -184,7 +187,8 @@
                                     <div class="col-sm-5">{{ field }}</div>
                                 {% else %}
                                     {% if field.label == "Notes" %}
-                                        <div class="row">{{ field }}</div>
+                                        <div class="row">{{ field }}
+                                            {{ field.errors }}</div>
                                     {% else %}
                                         {% if not field.is_hidden %}
                                             <div class="col-3">
@@ -214,7 +218,7 @@
                         <div class="row" style="margin-bottom:20px">
                             {% for field in form %}
                                 {% if field.label == "character_class" %}
-                                    <div class="col-sm-5">{{ field }}</div>
+                                    <div class="col-sm-5">{{ field }}{{ field.errors }}</div>
                                 {% else %}
                                     {% if field.label == "Notes" %}
                                         <div class="col-3">{{ field }}</div>
@@ -243,7 +247,7 @@
                                                             {{ field }}
                                                         {% else %}
                                                             {% if field.name == "classentry" %}
-                                                                <div class="col-sm-12">{{ field }}</div>
+                                                                <div class="col-sm-12">{{ field }}{{ field.errors }}</div>
                                                             {% else %}
                                                                 {% if field.name != "DELETE" %}
                                                                     <div class="col-12">{{ field }}</div>
@@ -255,7 +259,7 @@
                                                 {% else %}
                                                     {% for field in cform %}
                                                         {% if field.name == "classentry" %}
-                                                            <div class="col-sm-6">{{ field }}</div>
+                                                            <div class="col-sm-6">{{ field }}{{ field.errors }}</div>
                                                         {% else %}
                                                             {% if not field.is_hidden %}
                                                                 <div class="col-sm-3">{{ field }}</div>

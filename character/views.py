@@ -214,25 +214,38 @@ class CharacterDetailView (UpdateView):
             skill_formset.save()
         for characterskill in CharacterSkill.objects.filter(character=self.object):
             pfc = proficiency_formsets[characterskill]
-            if pfc.has_changed() and pfc.is_valid():
+            for single in pfc:
+                if single and single.has_changed() and single.is_valid():
+                    valid = True
+                    single.save()
+        if schtick_formset.has_changed():
+            if schtick_formset.is_valid():
                 valid = True
-                pfc.save()
-        if schtick_formset.has_changed() and schtick_formset.is_valid():
-            valid = True
-            schtick_formset.save()
-        if flaw_formset.has_changed() and flaw_formset.is_valid():
-            valid = True
-            flaw_formset.save()
+                schtick_formset.save()
+            else:
+                not_valid = " Schtick"
+        if flaw_formset.has_changed():
+            if flaw_formset.is_valid():
+                valid = True
+                flaw_formset.save()
+            else:
+                not_valid += " Flaw"
         if characterclass_formset.is_valid():
             valid = True
             characterclass_formset.save()
+        else:
+            not_valid += " Class"
+
         for characterclass in CharacterCharacterClass.objects.filter(character=self.object):
-            if characterclass.characterclassentry_set is None:
+            if characterclass.characterclassentry_set is not None:
                 cef = classentry_formsets[characterclass]
-                if cef.is_valid():
-                    valid = True
-                    cef.save()
+                for single in cef:
+                    if single.is_valid() and single.has_changed():
+                        valid = True
+                        single.save()
         if valid:
+            errors = {}
+            self.errors=errors
             return HttpResponseRedirect(self.get_success_url())
         else:
             return False
