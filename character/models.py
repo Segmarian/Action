@@ -54,7 +54,7 @@ class CharacterProficiency(models.Model):
 
     characterskill = models.ForeignKey(CharacterSkill, on_delete=models.PROTECT)
     proficiency = models.ForeignKey(Proficiency, on_delete=models.PROTECT)
-    acquired = models.BooleanField(null=True, blank=True)
+    acquired = models.NullBooleanField(null=True, blank=True)
     notes = models.CharField('Notes', max_length=120, null=True, blank=True)
 
     def __str__(self):
@@ -64,7 +64,7 @@ class CharacterProficiency(models.Model):
 class CharacterCharacterClass(models.Model):
     character = models.ForeignKey('Character', on_delete=models.PROTECT)
     characterclass = models.ForeignKey(CharacterClass, on_delete=models.PROTECT)
-    
+
     level = models.CharField('Level', max_length=120, choices={('Basic', 'Basic'),('Heroic', 'Heroic'),('Epic', 'Epic')})
 
     def __str__(self):

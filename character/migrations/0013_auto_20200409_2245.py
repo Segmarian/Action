@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='characterproficiency',
             name='acquired',
-            field=models.BooleanField(blank=True, null=True),
+            field=models.NullBooleanField(blank=True, null=True),
         ),
     ]
