@@ -8,5 +8,6 @@
 {% block menu-inline %}
 {% endblock menu-inline %}
 {% block content %}
+{% csrf_token %}
     {{ form }}
 {% endblock content %}

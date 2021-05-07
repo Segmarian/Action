@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="main"></div>
+<div class="container">
+<form class="card row" action="/schtick/{{object.pk}}/" method="post">
+    <div class="form-group card-body">
+        {% for field in form %}
+            <div>{{ field.label }}{{ field }}
+            {% if field.name == "req" %}
+                &nbsp;<span><a href="/prereq/new/">New</a></span>
+            {% elif field.name == "type" %}
+                &nbsp;<span><a href="/schtick/type/new/">New</a></span>
+            {% endif %}
+            </div>
+        {% endfor %}
+    <input type="submit" class="btn btn-primary" value="Submit">
+    </div>
+</form>
+</div>
+{% endblock content %}

@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'action.wsgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'action',
-        'USER': 'admin',
-        'PASSWORD': 'F14TomcatMySQL!',
-        'HOST': 'localhost',
+        'NAME': 'Character$action',
+        'USER': 'Character',
+        'PASSWORD': 'settings.py!',
+        'HOST': 'Character.mysql.pythonanywhere-services.com',
     }
 }
 

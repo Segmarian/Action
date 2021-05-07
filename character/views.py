@@ -50,6 +50,7 @@ class CharacterListView (ListView):
     template_name = "character/character_list.html"
     fields = '__all__'
 
+
 class CharacterBasicView (UpdateView):
     model = Character
     form_class = CharacterBasicForm

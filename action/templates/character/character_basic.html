@@ -9,7 +9,7 @@
 <form id="character" action="{% url 'charactercreate' %}" method="post">
     <div class="main"></div>
     <div class="container">
-        <div id="demo" class="collapse card card-body row show">
+        <div id="basic" class="collapse card card-body row show">
             {% csrf_token %}
             <div class="form-group card-body">
                 {% for field in form %}

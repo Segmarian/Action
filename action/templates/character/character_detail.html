@@ -8,42 +8,42 @@
 {% block menu-inline %}
     <li class="nav-item base">
         <h5>
-            <a href="#" class="nav-link" data-toggle="collapse" data-target="#demo">
+            <a href="#" class="nav-link" data-toggle="collapse" data-target="#chardata">
                 Character
             </a>
         </h5>
     </li>
     <li class="nav-item base">
         <h5>
-            <a href="#" class="nav-link" data-toggle="collapse" data-target="#demo2">
+            <a href="#" class="nav-link" data-toggle="collapse" data-target="#attributes">
                 Attributes
             </a>
         </h5>
     </li>
     <li class="nav-item base">
         <h5>
-            <a href="#" class="nav-link" data-toggle="collapse" data-target="#demo3">
+            <a href="#" class="nav-link" data-toggle="collapse" data-target="#skills">
                 Skills
             </a>
         </h5>
     </li>
     <li class="nav-item base">
         <h5>
-            <a href="#" class="nav-link" data-toggle="collapse" data-target="#demo4">
+            <a href="#" class="nav-link" data-toggle="collapse" data-target="#schticks">
                 Schticks
             </a>
         </h5>
     </li>
     <li class="nav-item base">
         <h5>
-            <a href="#" class="nav-link" data-toggle="collapse" data-target="#demo5">
+            <a href="#" class="nav-link" data-toggle="collapse" data-target="#flaws">
                 Flaws
             </a>
         </h5>
     </li>
     <li class="nav-item base">
         <h5>
-            <a href="#" class="nav-link" data-toggle="collapse" data-target="#demo6">
+            <a href="#" class="nav-link" data-toggle="collapse" data-target="#charclass">
                 Class
             </a>
         </h5>
@@ -57,7 +57,7 @@
         <div class="main"></div>
         <div class="container">
         {% csrf_token %}
-            <div id="demo" class="collapse card card-body row {{ section.character }}">
+            <div id="chardata" class="collapse card card-body row {{ section.character }}">
                 <div class="form-group card-body">
                     {% for field in form %}
                         <div>{{ field.label }}{{ field }}</div>
@@ -66,7 +66,7 @@
                     <input type="submit" class="btn btn-primary" value="Submit">
                 </div>
             </div>
-            <div id="demo2" class="card collapse {{ section.attribute }}">
+            <div id="attributes" class="card collapse {{ section.attribute }}">
                 <div>{{ object.xp.attribute }}</div>
                 <div class="card-body row">
                     {{ character_attribute_formset.management_form }}
@@ -95,7 +95,7 @@
                 </div>
             </div>
 
-            <div id="demo3" class="card collapse {{ section.skill }}">
+            <div id="skills" class="card collapse {{ section.skill }}">
                 <div class="form-group card-body">
                     {{ character_skill_formset.management_form }}
                     {% for charform in character_skill_formset %}
@@ -149,7 +149,7 @@
                     <input type="submit" name="character_skill" class="btn btn-primary" value="Submit">
                 </div>
             </div>
-            <div id="demo4" class="card collapse {{ section.schtick }}">
+            <div id="schticks" class="card collapse {{ section.schtick }}">
                 <div class="form-group card-body">
                     {{ character_schtick_formset.management_form }}
                     {% for form in character_schtick_formset %}
@@ -177,7 +177,7 @@
                     </div>
                 </div>
             </div>
-            <div id="demo5" class="card collapse {{ section.flaw }}">
+            <div id="flaws" class="card collapse {{ section.flaw }}">
                 <div class="form-group card-body">
                     {{ character_flaw_formset.management_form }}
                     {% for form in character_flaw_formset %}
@@ -211,7 +211,7 @@
                     </div>
                 </div>
             </div>
-            <div id="demo6" class="card collapse {{ section.characterclass }}">
+            <div id="charclass" class="card collapse {{ section.characterclass }}">
                 <div class="form-group card-body">
                     {{ character_characterclass_formset.management_form }}
                     {% for form in character_characterclass_formset %}
@@ -275,7 +275,7 @@
                                 </div>
                                 {% endif %}
                         {% endfor %}
-                    <div class=""row"><hr></div>
+                    <div class="row"><hr></div>
                     {% endfor %}
             <div class="row card-body">
                 <input type="submit" name="character_class" class="btn btn-primary" value="Submit">
