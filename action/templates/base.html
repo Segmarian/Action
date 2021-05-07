@@ -18,11 +18,13 @@
         {% endfor %}
     <nav class="d-display-none fixed-top nav col-sm navbar navbar-expand-md navbar-light base mw-40">
                     <ul class="nav nav-pills base">
-                        {% with request.session.schtickfilter as querystring %}
-                        <li class="nav-item base"><h5><a class="nav-link" href="{% url 'characters' %}">List</a></h5></li>
-                        {% endwith %}
-                    <!--<a class="nav-link" href="{% url 'schticks' %}">Schticks</a></h5></li>-->
-                        {% block menu-inline %} {% endblock menu-inline %}
+                         <li class="nav-item base">
+                    <h1>
+                        <a class="nav-link" href="{% url 'home' %}">Action!</a>
+                    </h1>
+                    </li>
+                        {% block menu-inline %}
+                        {% endblock menu-inline %}
                     </ul>
             {% block top_panel %}
             {% endblock top_panel%}

@@ -53,7 +53,7 @@
 {% block content %}
     <span>
     </span>
-    <form id="character" action="{% url 'characterdetail' object.pk %}" method="post">
+    <form id="character" action="{% url 'character_detail' object.pk %}" method="post">
         <div class="main"></div>
         <div class="container">
         {% csrf_token %}

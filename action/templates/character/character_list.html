@@ -6,11 +6,15 @@
 {% endblock head %}
 
 {% block menu-inline %}
-        <li class="nav-item base">
-                    <h5>
-                        <a class="nav-link" href="{% url 'charactercreate' %}">Create new</a>
-                    </h5>
-        </li>
+    {% with request.session.schtickfilter as querystring %}
+        <li class="nav-item base"><h5><a class="nav-link" href="{% url 'characters' %}">List</a></h5></li>
+    {% endwith %}
+    <!--<a class="nav-link" href="{% url 'schticks' %}">Schticks</a></h5></li>-->
+    <li class="nav-item base">
+                <h5>
+                    <a class="nav-link" href="{% url 'character_create' %}">Create new</a>
+                </h5>
+    </li>
 {%  endblock menu-inline %}
 
 {% block content %}
@@ -31,7 +35,7 @@
             {% for object in object_list %}
                 <tr scope="row">
                     <td>
-                        <a href="{%  url 'characterdetail' object.pk %}">{{ object.name }}</a>
+                        <a href="{%  url 'character_detail' object.pk %}">{{ object.name }}</a>
                     </td>
                     <td>
                         <span class=" badge badge-primary">Attribute: {{ object.xp.attribute }}</span>

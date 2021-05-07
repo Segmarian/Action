@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load action_tags %}
+
+{% block head %}
+    {{ filter.form.media.css }}
+{% endblock head %}
+
+{% block menu-inline %}
+    <li class="nav-item base">
+                    <h5>
+                        <a class="nav-link" href="{% url 'characterclass_create' %}">Create new</a>
+                    </h5>
+    </li>
+{% endblock menu-inline %}
+{% block content %}
+{% csrf_token %}
+    <div class="main"></div>
+    <div class="main"></div>
+    <div class="container">
+        {% for object in object_list %}
+        <div>
+            <a href="{%  url 'characterclass_detail' object.pk %}">{{ object }}</a>
+        </div>
+        {% endfor %}}
+    </div>
+{% endblock content %}

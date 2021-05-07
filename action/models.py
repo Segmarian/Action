@@ -92,8 +92,7 @@ class Schtick(models.Model):
         return typstr + ":" + self.name + " (Tier " + str(self.tier) + ")"
 
     name = models.CharField('Name', max_length=120)
-    req = models.ForeignKey("Prereq", on_delete=models.PROTECT,
-                            null=True, blank=True, related_name="schtickreq")
+    req = models.ManyToManyField("Prereq", related_name="schtickreq")
     cost = models.PositiveSmallIntegerField("Cost", null=True, blank=True)
     description = models.TextField('Description', null=True, blank=True)
     tier = models.PositiveSmallIntegerField("Tier", null=True, blank=True)
@@ -162,7 +161,8 @@ class Prereq(ValuePair):
         if self.proficiency:
             result += self.proficiency.name+" "
         if self.schtick:
-            result += self.schtick.name
+            result += self.schtick.name+" "
+        result += str(self.value)
         return result
 
 

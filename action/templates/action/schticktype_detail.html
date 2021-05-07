@@ -6,17 +6,11 @@
 {% endblock head %}
 
 {% block menu-inline %}
-    <li class="nav-item base">
-                    <h5>
-                        <a class="nav-link" href="{% url 'characterclass_list' %}">Prereqs</a>
-                    </h5>
-    </li>
 {% endblock menu-inline %}
 {% block content %}
-{{ object.pk }}
 <div class="main"></div>
 <div class="container">
-<form class="card row" action="{% url 'characterclass_detail' object.pk %}" method="post">
+<form class="card row" action="/schtick/type/{{object.pk}}/" method="post">
 {% csrf_token %}
     <div class="form-group card-body">
         {% for field in form %}
@@ -24,5 +18,6 @@
         {% endfor %}
     <input type="submit" class="btn btn-primary" value="Submit">
     </div>
-</form></div>
+</form>
+</div>
 {% endblock content %}
