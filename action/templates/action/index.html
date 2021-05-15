@@ -10,10 +10,13 @@
                         <a class="nav-link" href="{% url 'characters' %}">Characters</a>
                     </h5></li>
                     <li class="nav-item base"><h5>
-                        <a class="nav-link" href="{% url 'schticks' %}">Schticks</a></h5></li>
-
+                        <a class="nav-link" href="{% url 'schticks' %}">Schticks</a>
+                    </h5></li>
                     <li class="nav-item base"><h5>
-                        <a class="nav-link" href="{% url 'schticks' %}">Campaigns</a>
+                        <a class="nav-link" href="{% url 'flaws' %}">Flaws</a>
+                    </h5></li>
+                    <li class="nav-item base"><h5>
+                        <a class="nav-link" href="{% url 'campaigns' %}">Campaigns</a>
                     </h5></li>
                     <li class="nav-item base"><h5>
                         <a class="nav-link" href="{% url 'characterclass_list' %}">Classes</a>
@@ -23,6 +26,9 @@
                     </h5></li>
                     <li class="nav-item base"><h5>
                         <a class="nav-link" href="{% url 'prereqs' %}">Prereqs</a>
+                    </h5></li>
+                    <li class="nav-item base"><h5>
+                        <a class="nav-link" href="{% url 'campaigns' %}">Campaigns</a>
                     </h5></li>
       {%endblock menu-inline%}
 {% block content %}

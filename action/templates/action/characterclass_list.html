@@ -14,13 +14,37 @@
 {% endblock menu-inline %}
 {% block content %}
 {% csrf_token %}
-    <div class="main"></div>
-    <div class="main"></div>
     <div class="container">
-        {% for object in object_list %}
-        <div>
-            <a href="{%  url 'characterclass_detail' object.pk %}">{{ object }}</a>
-        </div>
-        {% endfor %}}
+    <table class="table">
+        <thead class="table">
+        <tr scope="row">
+            <th scope="col">
+                Name
+            </th>
+            <th scope="col">
+                Schticklist
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr scope="row">
+                    <td>
+                        <a href="{%  url 'characterclass_detail' object.pk %}">{{ object.name }}</a>
+                    </td>
+                    <td>
+                        {%for type in object.schtick_list.all%}
+                        {{ type.name }}&nbsp;
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {{ object.tier }}
+                    </td>
+                    <td>
+                        {{ typ }}
+                    </td>
+            {% endfor %}
+        </tbody>
+    </table>
     </div>
 {% endblock content %}

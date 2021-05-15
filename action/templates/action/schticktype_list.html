@@ -13,12 +13,30 @@
     </li>
 {% endblock menu-inline %}
 {% block content %}
-{% csrf_token %}
-    <div class="main"></div>
-    <div class="main"></div>
-    <div class="container">
-        {% for object in object_list %}
-            {{object}}
-        {% endfor %}}
-    </div>
+    <table class="table table-striped">
+        <thead class="table">
+        <tr scope="row">
+            <th scope="col">
+                Name
+            </th>
+            <th scope="col">
+                Members
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr scope="row">
+                    <td scope="col">
+                        <a href="{%  url 'schticktype_detail' object.pk %}">{{ object.name }}</a>
+                    </td>
+                    <td scope="col">
+                            {% for schtick in object.schticks.all %}
+                                <a href="{% url 'schtick_detail' schtick.pk %}">[{{ schtick.name }}]</a>
+                            {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock content %}

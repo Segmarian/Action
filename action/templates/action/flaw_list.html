@@ -8,11 +8,15 @@
 {% block menu-inline %}
     <li class="nav-item base">
                     <h5>
-                        <a class="nav-link" href="{% url 'schtick_create' %}">Create new</a>
+                        <a class="nav-link" href="{% url 'flaw_create' %}">Create new</a>
                     </h5>
     </li>
 {% endblock menu-inline %}
 {% block content %}
+<div class="main"></div>
+<div class="container">
+    <h3>Flaws</h3>
+
     <table class="table">
         <thead class="table">
         <tr scope="row">
@@ -20,13 +24,13 @@
                 Name
             </th>
             <th scope="col">
-                Prereqs
+
             </th>
             <th scope="col">
-                Tier / Cost
+                Benefit
             </th>
             <th scope="col">
-                Type
+
             </th>
             <th scope="col">
                 Description
@@ -37,28 +41,20 @@
             {% for object in object_list %}
                 <tr scope="row">
                     <td>
-                        <a href="{%  url 'schtick_detail' object.pk %}">{{ object.name }}</a>
+                        <a href="{%  url 'flaw_detail' object.pk %}">{{ object }}</a>
                     </td>
                     <td>
-                        {% for req in object.req.all %}
-                        {{ req }}
-                        {% endfor %}
                     </td>
                     <td>
-                        {{ object.tier }}
-                        {% if object.tier != object.cost and object.cost %}
-                         / {{ object.cost }}
-                        {% endif %}
+                        {{object.value}}
                     </td>
                     <td>
-                        {% for typ in object.type.all %}
-                        {{ typ }}
-                        {% endfor %}
                     </td>
                     <td>
-                        {{ object.description|truncatechars:40 }}
+                        {%if object.description%}{{ object.description|truncatechars:40 }}{% endif %}
                     </td>
             {% endfor %}
         </tbody>
     </table>
+    </div>
 {% endblock content %}

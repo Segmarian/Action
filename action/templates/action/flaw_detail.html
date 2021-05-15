@@ -8,9 +8,12 @@
     </li>
 {% endblock menu-inline %}
 {% block content %}
+<div class="main"></div>
+<div class="main"></div>
 <div class="container"><h3>{{object}}</h3>
 
 <form class="card row" action="{% if object.pk %}{% url 'schtick_detail' object.pk %}{%else%}{% url 'schtick_create' %}{% endif %}" method="post">
+    {{object.pk}}
 {% csrf_token %}
     <div class="form-group card-body">
         {% for field in form %}

@@ -13,15 +13,13 @@
     </li>
 {% endblock menu-inline %}
 {% block content %}
-{{ object.pk }}
 <div class="main"></div>
 <div class="container">
-    ::{{object.pk}}::<br>
 <form class="card row" action="{% if object.pk %} {% url 'prereq_detail' object.pk %} {% else %} {% url 'prereq_create' %}{% endif %}" method="post">
 {% csrf_token %}
     <div class="form-group card-body">
         {% for field in form %}
-            <div>{{ field.label }}</div><div>{{ field }}</div>{if<div><a href="{%url 'prereq_delete' object.pk}"</div>
+            <div>{{ field.label }}</div><div>{{ field }}</div>
         {% endfor %}
     <input type="submit" class="btn btn-primary" value="Submit">
     </div>

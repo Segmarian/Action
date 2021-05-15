@@ -42,7 +42,7 @@ class CharacterCreateView (CreateView):
             return response
 
     def get_success_url(self):
-        return reverse('characterdetail', kwargs={'pk': self.object.pk})
+        return reverse('character_detail', kwargs={'pk': self.object.pk})
 
 
 class CharacterListView (ListView):
@@ -55,17 +55,17 @@ class CharacterBasicView (UpdateView):
     model = Character
     form_class = CharacterBasicForm
     template_name = "character/character_detail.html"
-    success_url = reverse_lazy('characterbasic')
+    success_url = reverse_lazy('character_basic')
 
 
 class CharacterAttributeView (UpdateView):
     model = Character
     form_class = CharacterAttributeFormset
     template_name = "character/characterattribute.html"
-    success_url = reverse_lazy('characterattribute')
+    success_url = reverse_lazy('character_attribute')
 
     def get_success_url(self):
-        return reverse_lazy('characterattribute', {"pk": self.object})
+        return reverse_lazy('character_attribute', {"pk": self.object})
 
 
 class CharacterDetailView (UpdateView):
@@ -89,7 +89,7 @@ class CharacterDetailView (UpdateView):
         form = CharacterBasicForm(request.POST, instance=self.object)
         attribute_formset = CharacterAttributeFormset (request.POST,
                                                        instance=self.object,
-                                                       prefix='characterattribute')
+                                                       prefix='character_attribute')
         skill_formset = CharacterSkillFormset(request.POST,
                                               instance=self.object,
                                               prefix='characterskill')
@@ -256,17 +256,17 @@ class CharacterDetailView (UpdateView):
         return self.render_to_response(self.get_context_data())
 
     def get_success_url(self):
-        return reverse('characterdetail', kwargs={'pk': self.object.pk})
+        return reverse('character_detail', kwargs={'pk': self.object.pk})
 
 
 class CharacterSchtickView (UpdateView):
     model = Character
     form_class = CharacterSchtickFormset
     template_name = "character/characterattribute.html"
-    success_url = reverse_lazy('characterattribute')
+    success_url = reverse_lazy('character_attribute')
 
 
 class CharacterFlawView (FormView):
     form_class = CharacterFlawFormset
     template_name = "character/characterattribute.html"
-    success_url = reverse_lazy('characterflaw')
+    success_url = reverse_lazy('character_flaw')

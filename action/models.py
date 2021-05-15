@@ -75,6 +75,9 @@ class Attribute(models.Model):
 
 
 class SchtickType(models.Model):
+    class Meta:
+        ordering = ('name',)
+
     def __str__(self):
         return self.name
 
@@ -86,20 +89,27 @@ class Schtick(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        typstr = ""
+        typstr = self.name + ":"
         for typ in self.type.all():
-            typstr += str(typ.name) + " "
-        return typstr + ":" + self.name + " (Tier " + str(self.tier) + ")"
+            typstr += str(typ.name)+"/"
+        typstr = typstr[:-1]
+        return typstr + " (Tier " + str(self.tier) + ")"
+
+    def sort_str(self):
+        return str(self)
 
     name = models.CharField('Name', max_length=120)
-    req = models.ManyToManyField("Prereq", related_name="schtickreq")
+    req = models.ManyToManyField("Prereq", related_name="schtickreq", null=True, blank=True)
     cost = models.PositiveSmallIntegerField("Cost", null=True, blank=True)
     description = models.TextField('Description', null=True, blank=True)
     tier = models.PositiveSmallIntegerField("Tier", null=True, blank=True)
-    type = models.ManyToManyField("SchtickType", related_name='schticks')
+    type = models.ManyToManyField("SchtickType", related_name='schticks', )
 
 
 class Tag(models.Model):
+    class Meta:
+        ordering = ('name',)
+
     def __str__(self):
         return self.name
 
@@ -107,6 +117,9 @@ class Tag(models.Model):
 
 
 class Advancement(models.Model):
+    class Meta:
+        ordering = ('schtick', 'req', 'cost',)
+
     def __str__(self):
         return self.name + "(Schtick " + str(self.schtick) + ")"
 
@@ -126,7 +139,7 @@ class ValuePair(models.Model):
                str(self.skill.name) + \
                str(self.proficiency.name) + \
                str(self.schtick.name) + " " + \
-               str(self.value)
+               (self.value is not None | str(self.value))
 
     attribute = models.ForeignKey(Attribute, on_delete=models.PROTECT,
                                   null=True, blank=True, related_name="pv_attribute")
@@ -136,7 +149,7 @@ class ValuePair(models.Model):
                                     null=True, blank=True, related_name="pv_proficiency")
     schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT,
                                 null=True, blank=True, related_name="pv_schtick")
-    value = models.PositiveSmallIntegerField("Value")
+    value = models.PositiveSmallIntegerField("Value", null=True, blank=True, )
     calculated_attribute = models.ForeignKey(Attribute,
                                              on_delete=models.PROTECT,
                                              null=True, blank=True,
@@ -144,6 +157,9 @@ class ValuePair(models.Model):
 
 
 class Flaw(ValuePair):
+    class Meta:
+        ordering = ('name',)
+
     name = models.CharField('Name', max_length=120)
     description = models.CharField('Description', max_length=120, blank=True, null=True)
 
@@ -152,16 +168,19 @@ class Flaw(ValuePair):
 
 
 class Prereq(ValuePair):
+    class Meta:
+        ordering = ('attribute', 'skill', 'proficiency', 'schtick', 'value')
+
     def __str__(self):
         result = ""
         if self.attribute:
-            result += self.attribute.name+" "
+            result += self.attribute.name + " "
         if self.skill:
-            result += self.skill.name+" "
+            result += self.skill.name + " "
         if self.proficiency:
-            result += self.proficiency.name+" "
+            result += self.proficiency.name + " "
         if self.schtick:
-            result += self.schtick.name+" "
+            result += self.schtick.name + " "
         result += str(self.value)
         return result
 
@@ -182,7 +201,7 @@ class Modifier(ValuePair):
             sign = "-"
         else:
             sign = "+"
-        result=""
+        result = ""
         if self.attribute:
             result += self.attribute.name + " "
         if self.skill:
@@ -192,7 +211,7 @@ class Modifier(ValuePair):
         if self.schtick:
             result += self.schtick.name
         return sign + " " + \
-            result
+               result
 
 
 class CharacterClass(models.Model):
@@ -203,6 +222,7 @@ class CharacterClass(models.Model):
 
     def __str__(self):
         return str(self.name)
+
     name = models.CharField('Name', max_length=120)
 
 
@@ -225,7 +245,8 @@ class ClassEntry(models.Model):
             flaw = str(self.flaw.name)
             flawcost = str(self.flaw.value) or 0
         return schtick + flaw + \
-            notes + " (" + schtickcost + flawcost + ")"
+               notes + " (" + schtickcost + flawcost + ")"
+
     characterclass = models.ForeignKey(CharacterClass, on_delete=models.PROTECT)
     level = models.CharField('Level', max_length=120)
     schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT, blank=True, null=True)

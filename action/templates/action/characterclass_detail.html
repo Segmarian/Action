@@ -8,15 +8,22 @@
 {% block menu-inline %}
     <li class="nav-item base">
                     <h5>
-                        <a class="nav-link" href="{% url 'characterclass_list' %}">Prereqs</a>
+                        <a class="nav-link" href="{% url 'characterclass_list' %}">Classes</a>
+                    </h5>
+    </li>
+    <li class="nav-item base">
+                    <h5>
+                        <a class="nav-link" href="{% url 'schticktype_return_create' %}">New schticktype</a>
                     </h5>
     </li>
 {% endblock menu-inline %}
 {% block content %}
 {{ object.pk }}
 <div class="main"></div>
-<div class="container">
-<form class="card row" action="{% url 'characterclass_detail' object.pk %}" method="post">
+<div class="main"></div>
+<div class="container"><h3>Character Class</h3>
+
+<form class="card row" action="{% if object.pk %} {% url 'characterclass_detail' object.pk %} {%else%} {% url 'characterclass_create' %}{% endif %}" method="post">
 {% csrf_token %}
     <div class="form-group card-body">
         {% for field in form %}

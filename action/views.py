@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, TemplateView
+from django.urls import reverse_lazy
+from django_filters.views import FilterView
 
+from action.filters import *
 from action.models import *
 
 
@@ -11,10 +13,11 @@ class ActionView (TemplateView):
     template_name = "action/index.html"
 
 
-class CharacterClassListView (ListView):
+class CharacterClassListView (FilterView):
     model = CharacterClass
     template_name = "action/characterclass_list.html"
     fields = '__all__'
+    filterset_class = CharClassFilter
 
 
 class CharacterClassUpdateView (UpdateView):
@@ -33,10 +36,11 @@ class CharacterClassCreateView (CreateView):
     success_url = reverse_lazy('characterclass_list', )
 
 
-class ClassEntryListView (ListView):
+class ClassEntryListView (FilterView):
     model = ClassEntry
     template_name = "action/classentry.html"
     fields = '__all__'
+    filterset_class = ClassEntryFilter
 
 
 class ClassEntryUpdateView (UpdateView):
@@ -55,17 +59,18 @@ class ClassEntryCreateView (CreateView):
     success_url = reverse_lazy('classentry_list', )
 
 
-class SchtickListView (ListView):
+class SchtickListView (FilterView):
     model = Schtick
     template_name = "action/schtick_list.html"
     fields = '__all__'
+    filterset_class = SchtickFilter
 
 
 class SchtickCreateView (CreateView):
     model = Schtick
     template_name = "action/schtick_detail.html"
     fields = '__all__'
-    success_url = reverse_lazy('schtick_detail', )
+    success_url = reverse_lazy('schticks', )
 
 
 class SchtickUpdateView (UpdateView):
@@ -77,10 +82,34 @@ class SchtickUpdateView (UpdateView):
         return reverse_lazy('schtick_detail', kwargs={"pk": self.object.pk})
 
 
-class SchtickTypeListView (ListView):
+class FlawListView (FilterView):
+    model = Flaw
+    template_name = "action/flaw_list.html"
+    fields = '__all__'
+    filterset_class = FlawFilter
+
+
+class FlawCreateView (CreateView):
+    model = Flaw
+    template_name = "action/flaw_detail.html"
+    fields = '__all__'
+    success_url = reverse_lazy('flaws', )
+
+
+class FlawUpdateView (UpdateView):
+    model = Flaw
+    template_name = "action/flaw_detail.html"
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse_lazy('flaw_detail', kwargs={"pk": self.object.pk})
+
+
+class SchtickTypeListView (FilterView):
     model = SchtickType
     template_name = "action/schticktype_list.html"
     fields = '__all__'
+    filterset_class = SchtickTypeFilter
 
 
 class SchtickTypeUpdateView (UpdateView):
@@ -96,7 +125,14 @@ class SchtickTypeCreateView (CreateView):
     model = SchtickType
     template_name = "action/schticktype_detail.html"
     fields = '__all__'
-    success_url = reverse_lazy('schticktype_list', )
+    success_url = reverse_lazy('schticktypes', )
+
+
+class SchtickTypeCreateReturnView (CreateView):
+    model = SchtickType
+    template_name = "action/schticktype_detail.html"
+    fields = '__all__'
+    success_url = reverse_lazy('charclass_create', )
 
 
 class PrereqListView (ListView):
@@ -119,3 +155,29 @@ class PrereqUpdateView (UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('prereq_detail', kwargs={"pk": self.object.pk})
+
+
+class CampaignListView (ListView):
+    model = Campaign
+    template_name = "action/campaign_list.html"
+    fields = '__all__'
+
+
+class CampaignCreateView (CreateView):
+    model = Campaign
+    template_name = "action/campaign_detail.html"
+    fields = '__all__'
+    success_url = reverse_lazy('campaigns')
+
+
+class CampaignUpdateView (UpdateView):
+    model = Campaign
+    template_name = "action/campaign_detail.html"
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse_lazy('campaign_detail', kwargs={"pk": self.object.pk})
+
+def product_list(request):
+    f = ProductFilter(request.GET, queryset=Product.objects.all())
+    return render(request, 'my_app/template.html', {'filter': f})

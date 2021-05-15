@@ -8,57 +8,50 @@
 {% block menu-inline %}
     <li class="nav-item base">
                     <h5>
-                        <a class="nav-link" href="{% url 'schtick_create' %}">Create new</a>
+                        <a class="nav-link" href="{% url 'campaign_create' %}">Create new</a>
                     </h5>
     </li>
 {% endblock menu-inline %}
 {% block content %}
-    <table class="table">
+{% csrf_token %}
+    <div class="main"></div>
+    <div class="main"></div>
+    <div class="container">
+   <table class="table">
         <thead class="table">
         <tr scope="row">
             <th scope="col">
                 Name
             </th>
             <th scope="col">
-                Prereqs
+                Starting points
             </th>
             <th scope="col">
-                Tier / Cost
+                Classes
             </th>
             <th scope="col">
-                Type
+                Notes
             </th>
-            <th scope="col">
-                Description
-            </th>
+
         </tr>
         </thead>
         <tbody>
             {% for object in object_list %}
                 <tr scope="row">
                     <td>
-                        <a href="{%  url 'schtick_detail' object.pk %}">{{ object.name }}</a>
+                        <a href="{%  url 'campaign_detail' object.pk %}">{{ object.name }}</a>
                     </td>
                     <td>
-                        {% for req in object.req.all %}
-                        {{ req }}
-                        {% endfor %}
+                        {{object.starting_xp}}
                     </td>
                     <td>
-                        {{ object.tier }}
-                        {% if object.tier != object.cost and object.cost %}
-                         / {{ object.cost }}
-                        {% endif %}
+                        {{object.classes}}
                     </td>
                     <td>
-                        {% for typ in object.type.all %}
-                        {{ typ }}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {{ object.description|truncatechars:40 }}
+                        {{object.notes}}
                     </td>
             {% endfor %}
         </tbody>
     </table>
+    </div>
 {% endblock content %}
