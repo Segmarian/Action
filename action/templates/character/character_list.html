@@ -18,8 +18,6 @@
 {%  endblock menu-inline %}
 
 {% block content %}
-    <div class="main"></div>
-    <div class="main"></div>
     <table class="table">
         <thead class="table">
         <tr scope="row">
@@ -38,11 +36,11 @@
                         <a href="{%  url 'character_detail' object.pk %}">{{ object.name }}</a>
                     </td>
                     <td>
-                        <span class=" badge badge-primary">Attribute: {{ object.xp.attribute }}</span>
-                        <span class=" badge badge-primary">Skill: {{ object.xp.skill}}</span>
-                        <span class=" badge badge-primary">Schtick: {{ object.xp.schtick }}</span>
-                        <span class=" badge badge-primary">Class: {{ object.xp.class }}</span>
-                        <span class=" badge badge-warning">Flaw: {{ object.xp.flaw }}</span>
+                        <span class=" badge badge-primary hollow">Attribute: {{ object.xp.attribute }}</span>
+                        <span class=" badge badge-primary hollow">Skill: {{ object.xp.skill}}</span>
+                        <span class=" badge badge-primary hollow">Schtick: {{ object.xp.schtick }}</span>
+                        <span class=" badge badge-primary hollow">Class: {{ object.xp.class }}</span>
+                        <span class=" badge badge-primary hollow">Flaw: {{ object.xp.flaw }}</span>
                     </td>
                     <td>
                         {{ object.points }} / {{ object.xp.total }}

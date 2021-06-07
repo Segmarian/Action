@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load query_parameters %}
 {% load action_tags %}
 
 {% block head %}
@@ -13,52 +14,5 @@
     </li>
 {% endblock menu-inline %}
 {% block content %}
-    <table class="table">
-        <thead class="table">
-        <tr scope="row">
-            <th scope="col">
-                Name
-            </th>
-            <th scope="col">
-                Prereqs
-            </th>
-            <th scope="col">
-                Tier / Cost
-            </th>
-            <th scope="col">
-                Type
-            </th>
-            <th scope="col">
-                Description
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-            {% for object in object_list %}
-                <tr scope="row">
-                    <td>
-                        <a href="{%  url 'schtick_detail' object.pk %}">{{ object.name }}</a>
-                    </td>
-                    <td>
-                        {% for req in object.req.all %}
-                        {{ req }}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {{ object.tier }}
-                        {% if object.tier != object.cost and object.cost %}
-                         / {{ object.cost }}
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% for typ in object.type.all %}
-                        {{ typ }}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {{ object.description|truncatechars:40 }}
-                    </td>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% include 'action/schticklist_include.html' with list_queryset=object_list %}
 {% endblock content %}

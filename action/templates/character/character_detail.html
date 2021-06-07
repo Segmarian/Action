@@ -57,7 +57,7 @@
         <div class="main"></div>
         <div class="container">
         {% csrf_token %}
-            <div id="chardata" class="collapse card card-body row {{ section.character }}">
+            <div id="chardata" class="collapse.show card card-body row {{ section.character }}">
                 <div class="form-group card-body">
                     {% for field in form %}
                         <div>{{ field.label }}{{ field }}</div>

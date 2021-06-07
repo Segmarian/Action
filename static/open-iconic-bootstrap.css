@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+
+<html lang="en" style="height: 100%">
+    <head>
+        <meta charset="utf-8">
+        <title>open-iconic-bootstrap.css : /home/segmarian/exalted/Exalted/static/open-iconic-bootstrap.css : Editor : segmarian : PythonAnywhere</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="open-iconic-bootstrap.css : /home/segmarian/exalted/Exalted/static/open-iconic-bootstrap.css : Editor : segmarian : PythonAnywhere">
+        <meta name="author" content="PythonAnywhere LLP">
+        <meta name="google-site-verification" content="O4UxDrfcHjC44jybs2vajc1GgRkTKCTRgVzeV6I9V14" />
+
+
+        <!-- Le styles -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" />
+
+        <link rel="stylesheet" href="/static/CACHE/css/output.93590726e867.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/static/CACHE/css/output.c184c0fc7128.css" type="text/css" /><link rel="stylesheet" href="/static/CACHE/css/output.28401090a3ea.css" type="text/css" media="screen" />
+
+        <!-- Le javascript -->
+        <script type="text/javascript">
+            var Anywhere = {};
+            Anywhere.urls = {};
+            Anywhere.csrfToken = "rE1AjRFDCAffWqlLlykDtbh5glMF52eJGOaq7Fa135r2cVUUDRmt2XkyHBgtbiTN";
+        </script>
+        <script type="text/javascript" src="/static/CACHE/js/output.fd03122ca7ee.js"></script>
+        
+
+        <script type="text/javascript" src="/static/CACHE/js/output.df0a2ce83d48.js"></script>
+        
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $.extend(Anywhere.urls, {
+          file: "/user/segmarian/files/home/segmarian/exalted/Exalted/static/open-iconic-bootstrap.css",
+          check_hash: "/user/segmarian/files/home/segmarian/exalted/Exalted/static/open-iconic-bootstrap.css",
+          update_editor_mode_preference: "/user/segmarian/account/update_editor_mode_preference",
+          console_api: "/api/v0/user/segmarian/consoles/",
+        });
+        var filename = "/home/segmarian/exalted/Exalted/static/open\u002Diconic\u002Dbootstrap.css";
+        var hash = "22065f9aa20bb574c199fa49b1936a02";
+        var interpreter = "None";
+
+        
+            Anywhere.Editor.InitializeAce(ace, Anywhere.urls, filename, hash, interpreter, "pythonanywhere.com");
+            $("#id_keybinding_mode_select").val("normal");
+            $("#id_keybinding_mode_select").trigger("change");
+        
+        var consoleVisible = false;
+        Anywhere.Editor.splitPanes(consoleVisible);
+
+        Anywhere.WebAppControl.initialize();
+        Anywhere2.initializeFileSharingOptions(
+          $('#id_file_sharing_options')[0],
+          {
+            url: "/api/v0/user/segmarian/files/sharing/",
+            csrfToken: "rE1AjRFDCAffWqlLlykDtbh5glMF52eJGOaq7Fa135r2cVUUDRmt2XkyHBgtbiTN",
+            path: "/home/segmarian/exalted/Exalted/static/open\u002Diconic\u002Dbootstrap.css"
+          }
+        );
+
+      });
+    </script>
+
+        
+
+    </head>
+
+     <body style="height:100%;">
+       <div style="min-height: 100%; position: relative;">
+        
+        
+  
+
+
+
+
+  <nav class="navbar navbar-default fullscreen-main-navbar">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <img id="id_logo" src="/static/anywhere/images/PA-logo-snake-only.svg" height="100%" />
+      </a>
+    </div>
+
+    <div class="extra-nav-content">
+      
+
+  <div id="id_editor_toolbar">
+
+    <div class="pull-left">
+      <span id="id_breadcrumbs_div"><a class="breadcrumbs_link breadcrumb_entry" href="/user/segmarian/files/">/</a><a class="breadcrumbs_link breadcrumb_entry" href="/user/segmarian/files/home">home</a><span class="breadcrumb_entry">/</span><a class="breadcrumbs_link breadcrumb_entry" href="/user/segmarian/files/home/segmarian">segmarian</a><span class="breadcrumb_entry">/</span><a class="breadcrumbs_link breadcrumb_entry" href="/user/segmarian/files/home/segmarian/exalted">exalted</a><span class="breadcrumb_entry">/</span><a class="breadcrumbs_link breadcrumb_entry" href="/user/segmarian/files/home/segmarian/exalted/Exalted">Exalted</a><span class="breadcrumb_entry">/</span><a class="breadcrumbs_link breadcrumb_entry" href="/user/segmarian/files/home/segmarian/exalted/Exalted/static">static</a><span class="breadcrumb_entry">/</span><wbr><span class="breadcrumb_entry breadcrumb_terminal">open-iconic-bootstrap.css</span></span>
+
+      <span>
+        <span id="id_unsaved_changes_spacer">
+          <span id="id_unsaved_changes" class="pa_hidden muted">(unsaved changes)</span>
+        </span>
+      </span>
+    </div>
+
+    <div id="id_editor_messages" class="pull-left">
+      
+
+    </div>
+
+    <div class="pull-right">
+      <div id="id_editor_buttons_right" class="form-inline">
+        <span id="id_save_error" class="pa_hidden alert alert-danger">Error saving.</span>
+        <img src="/static/anywhere/images/spinner-small.gif" class="pa_hidden" id="id_save_spinner" />
+        
+          <span id="id_keyboard_shortcuts"><a href="#">Keyboard shortcuts:</a></span>
+          <select id="id_keybinding_mode_select" class="form-control input-sm">
+            <option value="normal">Normal</option>
+            <option value="vim">Vim</option>
+          </select>
+        
+        <button id="id_display_sharing_options" class="btn btn-default" data-toggle="modal" data-target="#id_file_sharing_modal" title="Get a URL to share this file">
+          <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+          Share
+        </button>
+        
+          <button id="id_save" class="btn btn-success" title="Save (Ctrl + S)">
+            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+            Save
+          </button>
+          <button id="id_save_as" class="btn btn-default" title="Save As">Save as...</button>
+        
+        
+
+        
+          
+            <form class="reload_web_app" style="display: flex" method="POST" action="/user/segmarian/webapps/segmarian.pythonanywhere.com/reload">
+              <button class="btn btn-default" type="submit" title="Reload segmarian.pythonanywhere.com">
+                <i class="glyphicon glyphicon-refresh"></i>
+              </button>
+              <img style="display: none;" class="spinner" src="/static/anywhere/images/spinner-small.gif" />
+              <div style="display: none; clear: both;" class="alert alert-danger error_message generic_error">
+                There was a problem. If this keeps happening, please <a href="" class="feedback_link">send us feedback</a>.
+              </div>
+              <div style="display: none; clear: both;" class="alert alert-danger error_message slow_startup_error">
+                Your webapp took a long time to reload. It probably reloaded, but we were unable to check it.
+              </div>
+              <div style="display: none; clear: both;" class="alert alert-danger error_message virtualenv_error">
+                There is a problem with your virtualenv setup. Look at the <b>virtualenv</b> section on the web app tab for details.
+              </div>
+              <div style="display: none; clear: both;" class="alert alert-danger error_message cname_error">
+                There is a problem with your DNS configuration. Take a look at the <b>DNS setup</b> section on the web app tab for details.
+              </div>
+            </form>
+          
+        
+      </div>
+    </div>
+
+  </div>
+
+
+    </div>
+
+    <div class="dropdown fullscreen-hamburger fullscreen-mini-nav">
+      <button type="button" class="navbar-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <ul class="dropdown-menu pull-right">
+        
+  <li class=""><a id="id_dashboard_link" href="/user/segmarian/">Dashboard</a></li>
+  <li class=""><a id="id_consoles_link" href="/user/segmarian/consoles/">Consoles</a></li>
+  <li class=""><a id="id_files_link" href="/user/segmarian/files/home/segmarian">Files</a></li>
+  <li class=""><a id="id_web_app_link" href="/user/segmarian/webapps/">Web</a></li>
+  <li class=""><a id="id_tasks_link" href="/user/segmarian/tasks_tab/">Tasks</a></li>
+  <li class=""><a id="id_databases_link" href="/user/segmarian/databases/">Databases</a></li>
+
+
+        <li class=""><a href="" class="feedback_link">Send feedback</a></li>
+<li class=""><a href="/forums/" class="forums_link">Forums</a></li>
+<li class=""><a href="https://help.pythonanywhere.com/" class="help_link">Help</a></li>
+<li class=""><a href="https://blog.pythonanywhere.com/" class="blog_link">Blog</a></li>
+
+  
+  <li class=""><a href="/user/segmarian/account/" class="account_link">Account</a></li>
+  <li class="">
+    <form action="/logout/" method="POST">
+      <input type='hidden' name='csrfmiddlewaretoken' value='rE1AjRFDCAffWqlLlykDtbh5glMF52eJGOaq7Fa135r2cVUUDRmt2XkyHBgtbiTN' />
+      <button type="submit" class="btn-link logout_link">Log out</button>
+    </form>
+  </li>
+
+
+      </ul>
+    </div>
+
+  </nav>
+
+
+
+        
+    
+
+
+        
+  <div>
+    <div id="id_ide_split_panes">
+
+      
+        <div id="id_editor">/* Bootstrap */
+
+@font-face {
+  font-family: &#39;Icons&#39;;
+  src: url(&#39;../fonts/open-iconic.eot&#39;);
+  src: url(&#39;../fonts/open-iconic.eot?#iconic-sm&#39;) format(&#39;embedded-opentype&#39;), url(&#39;../fonts/open-iconic.woff&#39;) format(&#39;woff&#39;), url(&#39;../fonts/open-iconic.ttf&#39;) format(&#39;truetype&#39;), url(&#39;../fonts/open-iconic.otf&#39;) format(&#39;opentype&#39;), url(&#39;../fonts/open-iconic.svg#iconic-sm&#39;) format(&#39;svg&#39;);
+  font-weight: normal;
+  font-style: normal;
+}
+
+.oi {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  speak:none;
+  font-family: &#39;Icons&#39;;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.oi:empty:before {
+  width: 1em;
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.oi.oi-align-center:before {
+  text-align: center;
+}
+
+.oi.oi-align-left:before {
+  text-align: left;
+}
+
+.oi.oi-align-right:before {
+  text-align: right;
+}
+
+
+.oi.oi-flip-horizontal:before {
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+.oi.oi-flip-vertical:before {
+  -webkit-transform: scale(1, -1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(1, -1);
+}
+
+.oi.oi-flip-horizontal-vertical:before {
+  -webkit-transform: scale(-1, -1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, -1);
+}
+
+
+.oi-account-login:before {
+  content:&#39;\e000&#39;;
+}
+
+.oi-account-logout:before {
+  content:&#39;\e001&#39;;
+}
+
+.oi-action-redo:before {
+  content:&#39;\e002&#39;;
+}
+
+.oi-action-undo:before {
+  content:&#39;\e003&#39;;
+}
+
+.oi-align-center:before {
+  content:&#39;\e004&#39;;
+}
+
+.oi-align-left:before {
+  content:&#39;\e005&#39;;
+}
+
+.oi-align-right:before {
+  content:&#39;\e006&#39;;
+}
+
+.oi-aperture:before {
+  content:&#39;\e007&#39;;
+}
+
+.oi-arrow-bottom:before {
+  content:&#39;\e008&#39;;
+}
+
+.oi-arrow-circle-bottom:before {
+  content:&#39;\e009&#39;;
+}
+
+.oi-arrow-circle-left:before {
+  content:&#39;\e00a&#39;;
+}
+
+.oi-arrow-circle-right:before {
+  content:&#39;\e00b&#39;;
+}
+
+.oi-arrow-circle-top:before {
+  content:&#39;\e00c&#39;;
+}
+
+.oi-arrow-left:before {
+  content:&#39;\e00d&#39;;
+}
+
+.oi-arrow-right:before {
+  content:&#39;\e00e&#39;;
+}
+
+.oi-arrow-thick-bottom:before {
+  content:&#39;\e00f&#39;;
+}
+
+.oi-arrow-thick-left:before {
+  content:&#39;\e010&#39;;
+}
+
+.oi-arrow-thick-right:before {
+  content:&#39;\e011&#39;;
+}
+
+.oi-arrow-thick-top:before {
+  content:&#39;\e012&#39;;
+}
+
+.oi-arrow-top:before {
+  content:&#39;\e013&#39;;
+}
+
+.oi-audio-spectrum:before {
+  content:&#39;\e014&#39;;
+}
+
+.oi-audio:before {
+  content:&#39;\e015&#39;;
+}
+
+.oi-badge:before {
+  content:&#39;\e016&#39;;
+}
+
+.oi-ban:before {
+  content:&#39;\e017&#39;;
+}
+
+.oi-bar-chart:before {
+  content:&#39;\e018&#39;;
+}
+
+.oi-basket:before {
+  content:&#39;\e019&#39;;
+}
+
+.oi-battery-empty:before {
+  content:&#39;\e01a&#39;;
+}
+
+.oi-battery-full:before {
+  content:&#39;\e01b&#39;;
+}
+
+.oi-beaker:before {
+  content:&#39;\e01c&#39;;
+}
+
+.oi-bell:before {
+  content:&#39;\e01d&#39;;
+}
+
+.oi-bluetooth:before {
+  content:&#39;\e01e&#39;;
+}
+
+.oi-bold:before {
+  content:&#39;\e01f&#39;;
+}
+
+.oi-bolt:before {
+  content:&#39;\e020&#39;;
+}
+
+.oi-book:before {
+  content:&#39;\e021&#39;;
+}
+
+.oi-bookmark:before {
+  content:&#39;\e022&#39;;
+}
+
+.oi-box:before {
+  content:&#39;\e023&#39;;
+}
+
+.oi-briefcase:before {
+  content:&#39;\e024&#39;;
+}
+
+.oi-british-pound:before {
+  content:&#39;\e025&#39;;
+}
+
+.oi-browser:before {
+  content:&#39;\e026&#39;;
+}
+
+.oi-brush:before {
+  content:&#39;\e027&#39;;
+}
+
+.oi-bug:before {
+  content:&#39;\e028&#39;;
+}
+
+.oi-bullhorn:before {
+  content:&#39;\e029&#39;;
+}
+
+.oi-calculator:before {
+  content:&#39;\e02a&#39;;
+}
+
+.oi-calendar:before {
+  content:&#39;\e02b&#39;;
+}
+
+.oi-camera-slr:before {
+  content:&#39;\e02c&#39;;
+}
+
+.oi-caret-bottom:before {
+  content:&#39;\e02d&#39;;
+}
+
+.oi-caret-left:before {
+  content:&#39;\e02e&#39;;
+}
+
+.oi-caret-right:before {
+  content:&#39;\e02f&#39;;
+}
+
+.oi-caret-top:before {
+  content:&#39;\e030&#39;;
+}
+
+.oi-cart:before {
+  content:&#39;\e031&#39;;
+}
+
+.oi-chat:before {
+  content:&#39;\e032&#39;;
+}
+
+.oi-check:before {
+  content:&#39;\e033&#39;;
+}
+
+.oi-chevron-bottom:before {
+  content:&#39;\e034&#39;;
+}
+
+.oi-chevron-left:before {
+  content:&#39;\e035&#39;;
+}
+
+.oi-chevron-right:before {
+  content:&#39;\e036&#39;;
+}
+
+.oi-chevron-top:before {
+  content:&#39;\e037&#39;;
+}
+
+.oi-circle-check:before {
+  content:&#39;\e038&#39;;
+}
+
+.oi-circle-x:before {
+  content:&#39;\e039&#39;;
+}
+
+.oi-clipboard:before {
+  content:&#39;\e03a&#39;;
+}
+
+.oi-clock:before {
+  content:&#39;\e03b&#39;;
+}
+
+.oi-cloud-download:before {
+  content:&#39;\e03c&#39;;
+}
+
+.oi-cloud-upload:before {
+  content:&#39;\e03d&#39;;
+}
+
+.oi-cloud:before {
+  content:&#39;\e03e&#39;;
+}
+
+.oi-cloudy:before {
+  content:&#39;\e03f&#39;;
+}
+
+.oi-code:before {
+  content:&#39;\e040&#39;;
+}
+
+.oi-cog:before {
+  content:&#39;\e041&#39;;
+}
+
+.oi-collapse-down:before {
+  content:&#39;\e042&#39;;
+}
+
+.oi-collapse-left:before {
+  content:&#39;\e043&#39;;
+}
+
+.oi-collapse-right:before {
+  content:&#39;\e044&#39;;
+}
+
+.oi-collapse-up:before {
+  content:&#39;\e045&#39;;
+}
+
+.oi-command:before {
+  content:&#39;\e046&#39;;
+}
+
+.oi-comment-square:before {
+  content:&#39;\e047&#39;;
+}
+
+.oi-compass:before {
+  content:&#39;\e048&#39;;
+}
+
+.oi-contrast:before {
+  content:&#39;\e049&#39;;
+}
+
+.oi-copywriting:before {
+  content:&#39;\e04a&#39;;
+}
+
+.oi-credit-card:before {
+  content:&#39;\e04b&#39;;
+}
+
+.oi-crop:before {
+  content:&#39;\e04c&#39;;
+}
+
+.oi-dashboard:before {
+  content:&#39;\e04d&#39;;
+}
+
+.oi-data-transfer-download:before {
+  content:&#39;\e04e&#39;;
+}
+
+.oi-data-transfer-upload:before {
+  content:&#39;\e04f&#39;;
+}
+
+.oi-delete:before {
+  content:&#39;\e050&#39;;
+}
+
+.oi-dial:before {
+  content:&#39;\e051&#39;;
+}
+
+.oi-document:before {
+  content:&#39;\e052&#39;;
+}
+
+.oi-dollar:before {
+  content:&#39;\e053&#39;;
+}
+
+.oi-double-quote-sans-left:before {
+  content:&#39;\e054&#39;;
+}
+
+.oi-double-quote-sans-right:before {
+  content:&#39;\e055&#39;;
+}
+
+.oi-double-quote-serif-left:before {
+  content:&#39;\e056&#39;;
+}
+
+.oi-double-quote-serif-right:before {
+  content:&#39;\e057&#39;;
+}
+
+.oi-droplet:before {
+  content:&#39;\e058&#39;;
+}
+
+.oi-eject:before {
+  content:&#39;\e059&#39;;
+}
+
+.oi-elevator:before {
+  content:&#39;\e05a&#39;;
+}
+
+.oi-ellipses:before {
+  content:&#39;\e05b&#39;;
+}
+
+.oi-envelope-closed:before {
+  content:&#39;\e05c&#39;;
+}
+
+.oi-envelope-open:before {
+  content:&#39;\e05d&#39;;
+}
+
+.oi-euro:before {
+  content:&#39;\e05e&#39;;
+}
+
+.oi-excerpt:before {
+  content:&#39;\e05f&#39;;
+}
+
+.oi-expand-down:before {
+  content:&#39;\e060&#39;;
+}
+
+.oi-expand-left:before {
+  content:&#39;\e061&#39;;
+}
+
+.oi-expand-right:before {
+  content:&#39;\e062&#39;;
+}
+
+.oi-expand-up:before {
+  content:&#39;\e063&#39;;
+}
+
+.oi-external-link:before {
+  content:&#39;\e064&#39;;
+}
+
+.oi-eye:before {
+  content:&#39;\e065&#39;;
+}
+
+.oi-eyedropper:before {
+  content:&#39;\e066&#39;;
+}
+
+.oi-file:before {
+  content:&#39;\e067&#39;;
+}
+
+.oi-fire:before {
+  content:&#39;\e068&#39;;
+}
+
+.oi-flag:before {
+  content:&#39;\e069&#39;;
+}
+
+.oi-flash:before {
+  content:&#39;\e06a&#39;;
+}
+
+.oi-folder:before {
+  content:&#39;\e06b&#39;;
+}
+
+.oi-fork:before {
+  content:&#39;\e06c&#39;;
+}
+
+.oi-fullscreen-enter:before {
+  content:&#39;\e06d&#39;;
+}
+
+.oi-fullscreen-exit:before {
+  content:&#39;\e06e&#39;;
+}
+
+.oi-globe:before {
+  content:&#39;\e06f&#39;;
+}
+
+.oi-graph:before {
+  content:&#39;\e070&#39;;
+}
+
+.oi-grid-four-up:before {
+  content:&#39;\e071&#39;;
+}
+
+.oi-grid-three-up:before {
+  content:&#39;\e072&#39;;
+}
+
+.oi-grid-two-up:before {
+  content:&#39;\e073&#39;;
+}
+
+.oi-hard-drive:before {
+  content:&#39;\e074&#39;;
+}
+
+.oi-header:before {
+  content:&#39;\e075&#39;;
+}
+
+.oi-headphones:before {
+  content:&#39;\e076&#39;;
+}
+
+.oi-heart:before {
+  content:&#39;\e077&#39;;
+}
+
+.oi-home:before {
+  content:&#39;\e078&#39;;
+}
+
+.oi-image:before {
+  content:&#39;\e079&#39;;
+}
+
+.oi-inbox:before {
+  content:&#39;\e07a&#39;;
+}
+
+.oi-infinity:before {
+  content:&#39;\e07b&#39;;
+}
+
+.oi-info:before {
+  content:&#39;\e07c&#39;;
+}
+
+.oi-italic:before {
+  content:&#39;\e07d&#39;;
+}
+
+.oi-justify-center:before {
+  content:&#39;\e07e&#39;;
+}
+
+.oi-justify-left:before {
+  content:&#39;\e07f&#39;;
+}
+
+.oi-justify-right:before {
+  content:&#39;\e080&#39;;
+}
+
+.oi-key:before {
+  content:&#39;\e081&#39;;
+}
+
+.oi-laptop:before {
+  content:&#39;\e082&#39;;
+}
+
+.oi-layers:before {
+  content:&#39;\e083&#39;;
+}
+
+.oi-lightbulb:before {
+  content:&#39;\e084&#39;;
+}
+
+.oi-link-broken:before {
+  content:&#39;\e085&#39;;
+}
+
+.oi-link-intact:before {
+  content:&#39;\e086&#39;;
+}
+
+.oi-list-rich:before {
+  content:&#39;\e087&#39;;
+}
+
+.oi-list:before {
+  content:&#39;\e088&#39;;
+}
+
+.oi-location:before {
+  content:&#39;\e089&#39;;
+}
+
+.oi-lock-locked:before {
+  content:&#39;\e08a&#39;;
+}
+
+.oi-lock-unlocked:before {
+  content:&#39;\e08b&#39;;
+}
+
+.oi-loop-circular:before {
+  content:&#39;\e08c&#39;;
+}
+
+.oi-loop-square:before {
+  content:&#39;\e08d&#39;;
+}
+
+.oi-loop:before {
+  content:&#39;\e08e&#39;;
+}
+
+.oi-magnifying-glass:before {
+  content:&#39;\e08f&#39;;
+}
+
+.oi-map-marker:before {
+  content:&#39;\e090&#39;;
+}
+
+.oi-map:before {
+  content:&#39;\e091&#39;;
+}
+
+.oi-media-pause:before {
+  content:&#39;\e092&#39;;
+}
+
+.oi-media-play:before {
+  content:&#39;\e093&#39;;
+}
+
+.oi-media-record:before {
+  content:&#39;\e094&#39;;
+}
+
+.oi-media-skip-backward:before {
+  content:&#39;\e095&#39;;
+}
+
+.oi-media-skip-forward:before {
+  content:&#39;\e096&#39;;
+}
+
+.oi-media-step-backward:before {
+  content:&#39;\e097&#39;;
+}
+
+.oi-media-step-forward:before {
+  content:&#39;\e098&#39;;
+}
+
+.oi-media-stop:before {
+  content:&#39;\e099&#39;;
+}
+
+.oi-medical-cross:before {
+  content:&#39;\e09a&#39;;
+}
+
+.oi-menu:before {
+  content:&#39;\e09b&#39;;
+}
+
+.oi-microphone:before {
+  content:&#39;\e09c&#39;;
+}
+
+.oi-minus:before {
+  content:&#39;\e09d&#39;;
+}
+
+.oi-monitor:before {
+  content:&#39;\e09e&#39;;
+}
+
+.oi-moon:before {
+  content:&#39;\e09f&#39;;
+}
+
+.oi-move:before {
+  content:&#39;\e0a0&#39;;
+}
+
+.oi-musical-note:before {
+  content:&#39;\e0a1&#39;;
+}
+
+.oi-paperclip:before {
+  content:&#39;\e0a2&#39;;
+}
+
+.oi-pencil:before {
+  content:&#39;\e0a3&#39;;
+}
+
+.oi-people:before {
+  content:&#39;\e0a4&#39;;
+}
+
+.oi-person:before {
+  content:&#39;\e0a5&#39;;
+}
+
+.oi-phone:before {
+  content:&#39;\e0a6&#39;;
+}
+
+.oi-pie-chart:before {
+  content:&#39;\e0a7&#39;;
+}
+
+.oi-pin:before {
+  content:&#39;\e0a8&#39;;
+}
+
+.oi-play-circle:before {
+  content:&#39;\e0a9&#39;;
+}
+
+.oi-plus:before {
+  content:&#39;\e0aa&#39;;
+}
+
+.oi-power-standby:before {
+  content:&#39;\e0ab&#39;;
+}
+
+.oi-print:before {
+  content:&#39;\e0ac&#39;;
+}
+
+.oi-project:before {
+  content:&#39;\e0ad&#39;;
+}
+
+.oi-pulse:before {
+  content:&#39;\e0ae&#39;;
+}
+
+.oi-puzzle-piece:before {
+  content:&#39;\e0af&#39;;
+}
+
+.oi-question-mark:before {
+  content:&#39;\e0b0&#39;;
+}
+
+.oi-rain:before {
+  content:&#39;\e0b1&#39;;
+}
+
+.oi-random:before {
+  content:&#39;\e0b2&#39;;
+}
+
+.oi-reload:before {
+  content:&#39;\e0b3&#39;;
+}
+
+.oi-resize-both:before {
+  content:&#39;\e0b4&#39;;
+}
+
+.oi-resize-height:before {
+  content:&#39;\e0b5&#39;;
+}
+
+.oi-resize-width:before {
+  content:&#39;\e0b6&#39;;
+}
+
+.oi-rss-alt:before {
+  content:&#39;\e0b7&#39;;
+}
+
+.oi-rss:before {
+  content:&#39;\e0b8&#39;;
+}
+
+.oi-script:before {
+  content:&#39;\e0b9&#39;;
+}
+
+.oi-share-boxed:before {
+  content:&#39;\e0ba&#39;;
+}
+
+.oi-share:before {
+  content:&#39;\e0bb&#39;;
+}
+
+.oi-shield:before {
+  content:&#39;\e0bc&#39;;
+}
+
+.oi-signal:before {
+  content:&#39;\e0bd&#39;;
+}
+
+.oi-signpost:before {
+  content:&#39;\e0be&#39;;
+}
+
+.oi-sort-ascending:before {
+  content:&#39;\e0bf&#39;;
+}
+
+.oi-sort-descending:before {
+  content:&#39;\e0c0&#39;;
+}
+
+.oi-spreadsheet:before {
+  content:&#39;\e0c1&#39;;
+}
+
+.oi-star:before {
+  content:&#39;\e0c2&#39;;
+}
+
+.oi-sun:before {
+  content:&#39;\e0c3&#39;;
+}
+
+.oi-tablet:before {
+  content:&#39;\e0c4&#39;;
+}
+
+.oi-tag:before {
+  content:&#39;\e0c5&#39;;
+}
+
+.oi-tags:before {
+  content:&#39;\e0c6&#39;;
+}
+
+.oi-target:before {
+  content:&#39;\e0c7&#39;;
+}
+
+.oi-task:before {
+  content:&#39;\e0c8&#39;;
+}
+
+.oi-terminal:before {
+  content:&#39;\e0c9&#39;;
+}
+
+.oi-text:before {
+  content:&#39;\e0ca&#39;;
+}
+
+.oi-thumb-down:before {
+  content:&#39;\e0cb&#39;;
+}
+
+.oi-thumb-up:before {
+  content:&#39;\e0cc&#39;;
+}
+
+.oi-timer:before {
+  content:&#39;\e0cd&#39;;
+}
+
+.oi-transfer:before {
+  content:&#39;\e0ce&#39;;
+}
+
+.oi-trash:before {
+  content:&#39;\e0cf&#39;;
+}
+
+.oi-underline:before {
+  content:&#39;\e0d0&#39;;
+}
+
+.oi-vertical-align-bottom:before {
+  content:&#39;\e0d1&#39;;
+}
+
+.oi-vertical-align-center:before {
+  content:&#39;\e0d2&#39;;
+}
+
+.oi-vertical-align-top:before {
+  content:&#39;\e0d3&#39;;
+}
+
+.oi-video:before {
+  content:&#39;\e0d4&#39;;
+}
+
+.oi-volume-high:before {
+  content:&#39;\e0d5&#39;;
+}
+
+.oi-volume-low:before {
+  content:&#39;\e0d6&#39;;
+}
+
+.oi-volume-off:before {
+  content:&#39;\e0d7&#39;;
+}
+
+.oi-warning:before {
+  content:&#39;\e0d8&#39;;
+}
+
+.oi-wifi:before {
+  content:&#39;\e0d9&#39;;
+}
+
+.oi-wrench:before {
+  content:&#39;\e0da&#39;;
+}
+
+.oi-x:before {
+  content:&#39;\e0db&#39;;
+}
+
+.oi-yen:before {
+  content:&#39;\e0dc&#39;;
+}
+
+.oi-zoom-in:before {
+  content:&#39;\e0dd&#39;;
+}
+
+.oi-zoom-out:before {
+  content:&#39;\e0de&#39;;
+}
+</div>
+      
+
+      <div id="id_ide_console">
+        
+          <div id="id_ide_console_pane_buttons">
+            <center>
+              
+                <p>This is not a Python file, you can't run it here.</p>
+              
+            </center>
+          </div>
+          <iframe style="display: none" id="id_console" name="console" class="soft_keyboard_sensitive">
+          </iframe>
+          <div style="display: none;" class="console_limit_reached">
+            <div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3 well">
+            <h1>Console limit reached :-/</h1>
+
+            <p>
+            With your current PythonAnywhere account you can have up to
+            2 consoles.  You can
+            have more if you
+            <a href="/user/segmarian/account/">upgrade your account</a>!
+
+            <p>
+            Alternatively, if you don't feel like paying us more money, you
+            can <a href="/user/segmarian/consoles/">kill some consoles on your Consoles page</a>.
+        </div>
+    </div>
+</div>
+
+
+          </div>
+        
+      </div>
+
+    </div>
+
+    <div id="id_go_to_line_dialog" class="pa_hidden">
+      <p class="form-inline">Line number: <input id="id_go_to_line_dialog_input" /></p>
+      <div class="dialog_buttons">
+        <button class="btn btn-default" id="id_go_to_line_dialog_ok_button">Go</button>
+        <button class="btn btn-default" id="id_go_to_line_dialog_close_button">Close</button>
+      </div>
+    </div>
+
+    <div id="id_file_changed_on_disk" class="pa_hidden">
+      <p>Are you sure you want to save it?  Alternatively, you could re-open it in a new tab to check differences</p>
+      <div class="dialog_buttons">
+        <button id="id_force_save" class="btn btn-danger">Force Save</button>
+        <button id="id_cancel_save" class="btn btn-default">Cancel</button>
+      </div>
+    </div>
+
+    <div id="id_save_as_dialog" class="pa_hidden">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="id_save_as_path">Please enter a path:</label>
+          <input id="id_save_as_path" class="form-control" style="width: 100%;" />
+        </div>
+        <img id="id_save_as_spinner" class="spinner pa_hidden" src="/static/anywhere/images/spinner-small.gif" />
+        <p>
+          <span id="id_save_as_error" class="error_message"></span>
+        </p>
+        <div class="dialog_buttons">
+          <button id="id_save_as_ok" type="submit" class="btn btn-primary">Save</button>
+          <button id="id_save_as_cancel" type="button" class="btn btn-default">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal fade" id="id_file_sharing_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">File Sharing options</h4>
+          </div>
+          <div class="modal-body">
+            <div id="id_file_sharing_options"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+        
+      </div>
+
+        
+
+
+        <div id="id_feedback_dialog" title="Help us improve" style="display:none">
+    <div id="id_feedback_dialog_blurb_big" class="dialog_blurb_big">
+        It's always a pleasure to hear from you!
+    </div>
+    <div id="id_feedback_dialog_blurb_small">
+        Ask us a question, or tell us what you love or hate about PythonAnywhere.<br/>
+        We'll get back to you over email ASAP.
+    </div>
+    <textarea id="id_feedback_dialog_text" rows="6"></textarea>
+    <input id="id_feedback_dialog_email_address" type="text" placeholder="Email address (optional - only necessary if you would like us to contact you)"/>
+    
+    <div id="id_feedback_dialog_error" style="display: none">
+        Sorry, there was an error connecting to the server. <br/>Please try again in a few moments...
+    </div>
+    <div id="id_feedback_dialog_rate_limit_error" style="display: none">
+        Sorry, we have had to rate-limit your feedback sending.<br/>Please try again in a few moments...
+    </div>
+    <div id="id_feedback_dialog_success" style="display: none">
+        Thanks for the feedback! Our tireless devs will get back to you soon.
+    </div>
+    <div class="dialog_buttons">
+        <img id="id_feedback_dialog_spinner" src="/static/anywhere/images/spinner-small.gif" />
+        <button class="btn btn-primary" id="id_feedback_dialog_ok_button">OK</button>
+        <button class="btn btn-default" id="id_feedback_dialog_cancel_button">Cancel</button>
+    </div>
+    <div id="id_feedback_dialog_only_close_button" style="display: none">
+        <button class="btn btn-primary" id="id_feedback_dialog_close_button">Close</button>
+    </div>
+</div>
+
+
+        
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-18014859-6', 'auto');
+                ga('send', 'pageview');
+            </script>
+        
+
+        
+        <!-- preload font awesome fonts to avoid glitch when switching icons -->
+        <div style="width: 0; height: 0; overflow: hidden"><i class="fa fa-square-o fa-3x" ></i></div>
+    </body>
+</html>

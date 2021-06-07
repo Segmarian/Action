@@ -54,7 +54,7 @@ class CharacterProficiency(models.Model):
 
     characterskill = models.ForeignKey(CharacterSkill, on_delete=models.PROTECT)
     proficiency = models.ForeignKey(Proficiency, on_delete=models.PROTECT)
-    acquired = models.NullBooleanField(null=True, blank=True)
+    acquired = models.BooleanField(null=True, blank=True)
     notes = models.CharField('Notes', max_length=120, null=True, blank=True)
 
     def __str__(self):

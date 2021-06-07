@@ -14,8 +14,6 @@
 {% endblock menu-inline %}
 {% block content %}
 {% csrf_token %}
-    <div class="main"></div>
-    <div class="main"></div>
     <div class="container">
         {% for object in object_list %}
             {{ object }}

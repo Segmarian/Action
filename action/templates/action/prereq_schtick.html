@@ -1,0 +1,3 @@
+{% for item in object.schtick.req.all %}{% if item.schtick.req %}<a class="badge badge-primary hollow">{{item}}</a>
+{% include 'action/prereq_schtick.html' with object=item %}{% endif %}
+{% endfor %}

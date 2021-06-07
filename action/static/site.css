@@ -14,10 +14,10 @@
 body {
     font-family: Garamond, serif;
     font-size: 18px;
-    background-color: rgba(255, 212, 0, 0.1);
+    background-color: rgba(106,255,106,0.25);
     margin-bottom: 3cm;
-    border-color: #FFAA00;
-    color: #AA5500;
+    border-color: #3AFF3A;
+    color: #3A3A3A;
 }
 
 body.print{
@@ -45,13 +45,13 @@ body.print{
 */
 
 nav{
-    background-color: rgba(255, 170, 0, 0.5);
-    border-color: #FA9700;
+    background-color: rgba(85, 212, 85, 0.25);
+    border-color: #00FA97;
     padding-top: 2em;
 }
 
 .nav-pills{
-    border-color: rgba(255, 170, 0, 0.1);
+    border-color: rgba(85, 212, 85, 0.1);
 }
 
 .nav-item{
@@ -59,14 +59,14 @@ nav{
 }
 
 nav>div>ul>li{
-    background-color: rgba(255, 170, 0, 1);
-    border-color: rgba(255, 170, 0, 1);
+    background-color: rgba(85, 212, 85, 1);
+    border-color: rgba(85, 212, 85, 1);
     border-radius: 8px;
 }
 
 nav>div>ul>li:hover, nav>div>ul>li:hover>h5>a, a:hover{
-    background-color: rgba(170, 85, 0, 1);
-    border-color: rgba(170, 85, 0, 1);
+    background-color: rgba(42, 170, 42, 1);
+    border-color: rgba(42, 170, 42, 1);
 }
 
 /*
@@ -80,9 +80,9 @@ padding-top: 10px;
 }
 
 .form-control{
-    background-color: rgba(255, 212, 170, 0.1);
-    border: 1px solid #FA9700;
-    color: #AA5500;
+    background-color: rgba(170, 212, 106, 0.1);
+    border: 1px solid #00FA97;
+    color: #3AAA3A;
 }
 
 .form-inline label {
@@ -90,15 +90,27 @@ padding-top: 10px;
 }
 
 .badge-primary{
-    background-color: rgba(255, 170, 0, 1);
+    background-color: rgba(85,212, 85, 1);
     color: black;
     padding: 5px;
     margin-top: 0px;
+    font-weight:1;
+    font-size:16px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+.badge-primary:hover{
+    background-color: rgba(85,212, 85, 1);
 }
 
 .badge-primary-small{
     padding: 0px;
     margin-top: 0px;
+}
+
+.hollow{
+    background-color: rgba(85,212, 85, 0.25);
+    border: 1px solid rgba(85,212, 85, 1);
 }
 
 
@@ -118,34 +130,36 @@ padding-top: 10px;
 }
 
 select option {
-    border-color: #AA5500;
-    background: rgba(255, 170, 0, 0.3);
-    color: #AA5500;
+    border-color: #3AAA3A;
+    background: rgba(85, 212, 85, 0.3);
+    color: #005500;
 }
 
 .form-control:focus{
-    background-color: rgba(255, 212, 170, 0.1);
+    background-color: rgba(170, 212, 106, 0.1);
     color:#000;
     border-color: #FA9700;
-    box-shadow: inset 0 2px 2px rgba(0,0,0,.075), 0 0 16px rgba(255, 212, 170, .6);
+    box-shadow: inset 0 2px 2px rgba(0,0,0,.075), 0 0 16px rgba(17106, 212, 106, .6);
 }
 
 input:hover>.btn{
-    background-color: rgba(255, 170, 0, 1);
+    background-color: rgba(85, 212, 85, 1);
 }
 
 a, .btn-primary, .btn-submit:hover {
     font-size: 1rem;
-    color: rgba(170, 85, 0, 1);
-    background-color: rgba(255, 170, 0, 1);
-    border-color: rgba(255, 170, 0, 1);
+    color: rgba(0, 0, 0, 1);
+    background-color: rgba(85, 212, 85, 1);
+    border-color: rgba(85, 212, 85, 1);
 }
 
-a:hover, li:hover > h5 > a , li > h3 > div:hover, div:hover > a, div> a:hover>span.glyphicon, button, button:hover>a, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+a:hover, li:hover > h5 > a , li > h3 > div:hover, div:hover > a, div> a:hover>span.glyphicon, button,
+button:hover>a, .btn-primary:hover, .btn-primary:active, .btn-primary:focus, a.badge-primary:hover,
+ a.badge-primary:hover {
     text-decoration:none;
-    background-color: rgba(170, 85, 0, 1);
-    color: rgba(255, 255, 170, 1);
-    border-color: #FA9700;
+    background-color: rgba(42, 170, 42, 1);
+    color: rgba(170, 255, 170, 1);
+    border-color: #4Fff4F;
 }
 
 th>a{
@@ -154,22 +168,22 @@ th>a{
 }
 
 td>a , th>a{
-    background-color: rgba(255, 212, 0, 0);
-    color: rgba(170, 85, 0, 1);
-    border-color: #FA9700;
+    background-color: rgba(85, 212, 85, 0);
+    color: rgba(0, 85, 0, 1);
+    border-color: #4Fff4F;
     padding: 3px;
     border-radius: 3px;
 }
 
 
 .nav>li>a:hover, td>a:hover{
-    background-color: rgba(255, 170, 0, 1);
-    color: rgba(255, 255, 170, 1);
-    border-color: #FA9700;
+    background-color: rgba(42, 170, 42, 1);
+    color: rgba(170, 255, 170, 1);
+    border-color: #4Fff4F;
 }
 
 .main{
-    padding: 70px 3rem 0rem 3rem !important;
+    padding: 100px 3rem 0rem 3rem !important;
 }
 
 /*
@@ -199,7 +213,7 @@ background-color: rgba(255, 212, 85, 0.1);
 
 .blank:hover, .blank:active{
     background-color: transparent;
-    color: rgba(170, 85, 0, 1);
+    color: rgba(42, 170, 42, 1);
 }
 
 a .oi{
@@ -210,18 +224,18 @@ a .oi{
     font-size: 1.125rem;
     font-weight: 700;
     background-color: transparent;
-    color: rgba(170, 85, 0, 1);
+    color: rgba(42, 170, 42, 1);
 }
 
 span.badge.badge-primary.rounded.charmlist {
-    color: rgba(255, 170, 0, 1);
-    background-color: rgba(255, 170, 0, 0);
-    border-color: rgba(255, 170, 0, 1);
+    color: rgba(85, 212, 85, 1);
+    background-color: rgba(85, 212, 85, 0);
+    border-color: rgba(85, 212, 85, 1);
 }
 
 span.badge.badge-primary.rounded.charmlist:hover, .charmlist :hover,  a .charmlist:hover , .charmlist a:hover{
-    color: rgba(170, 85, 0, 1);
-    background-color: rgba(255, 185, 0, 1);
+    color: rgba(42, 170, 42, 1);
+    background-color: rgba(85, 255, 85, 1);
 }
 
 .no_border{
@@ -229,7 +243,7 @@ span.badge.badge-primary.rounded.charmlist:hover, .charmlist :hover,  a .charmli
 }
 
 /*
-background-color: rgba(170, 85, 0, 1);
+background-color: rgba(170, 42, 42, 1);
 color: rgba(255, 255, 255, 1)
 */
 
@@ -257,18 +271,20 @@ color: rgba(255, 255, 255, 1)
     overflow-y: auto;
 }
 
-.table td{
-    padding:0rem .75rem 0rem;
+.table, td{
+    padding: 0rem .75rem 0rem;
     vertical-align: middle!important;
+    border-bottom: 1px solid rgba(85, 255, 85, 1);
 }
+
 h4{
     margin-bottom: 0.2rem;
 }
 
 .hollow > span{
     background-color:transparent;
-    color: rgba(170, 85, 0, 1);
-    border: 1px solid rgba(170, 85, 0, 1);
+    color: rgba(85, 170, 85, 1);
+    border: 1px solid rgba(42, 170, 42, 1);
 }
 
 .print, .print > span{

@@ -6,6 +6,17 @@
 {% endblock head %}
 
 {% block menu-inline %}
+    <li class="nav-item base">
+                    <h5>
+                        <a class="nav-link" href="{% url 'schticktypes' %}">Prereqs</a>
+                    </h5>
+    </li>{% if object.pk %}
+    <li class="nav-item base">
+        <h5>
+            <a class="nav-link" href="{% url 'schticktype_delete' object.pk %}">Delete {{object.name}}</a>
+        </h5>
+    </li>
+    {% endif %}
 {% endblock menu-inline %}
 {% block content %}
 <div class="main"></div>
@@ -14,10 +25,14 @@
 {% csrf_token %}
     <div class="form-group card-body">
         {% for field in form %}
-            <div>{{ field.label }}{{ field }}</div>
+            <div class="card">{{ field.label }}{{ field }}</div>
         {% endfor %}
     <input type="submit" class="btn btn-primary" value="Submit">
     </div>
 </form>
+    <div class="col">
+        <h3>Schticks in Schticktype</h3>
+        {% include 'action/schticklist_include.html' with list_queryset=object.schticks.all %}
+    </div>
 </div>
 {% endblock content %}

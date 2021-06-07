@@ -26,14 +26,21 @@
         </thead>
         <tbody>
             {% for object in object_list %}
-                <tr scope="row">
+                <tr scope="row border">
                     <td scope="col">
                         <a href="{%  url 'schticktype_detail' object.pk %}">{{ object.name }}</a>
                     </td>
                     <td scope="col">
-                            {% for schtick in object.schticks.all %}
-                                <a href="{% url 'schtick_detail' schtick.pk %}">[{{ schtick.name }}]</a>
-                            {% endfor %}
+                            <h4>{% for schtick in object.schticks.all %}
+                                <a class="badge badge-primary hollow" href="{% url 'schtick_detail' schtick.pk %}">{{ schtick.name }}</a>
+                            {% endfor %}</h4>
+                            {% if object.schticktype_list %}
+                                {% for type in object.schticktype_list.all %}
+                                    <h4>{% for schtick in type.schticks.all %}
+                                        <a class="badge badge-primary hollow" href="{% url 'schtick_detail' schtick.pk %}">{{ schtick.name }}</a>
+                                    {% endfor %}</h4>
+                                {% endfor %}
+                            {% endif %}
                     </td>
                 </tr>
             {% endfor %}

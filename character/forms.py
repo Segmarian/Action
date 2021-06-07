@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from character.models import *
 from django.forms import *
+from django import forms
 
 
 class CharacterBasicForm(ModelForm):
@@ -53,25 +54,12 @@ class CharacterSchtickForm(ModelForm):
 
     schtick = ModelChoiceField(queryset=Schtick.objects.exclude(type=4).order_by('type__name'))
 
+
 class CharacterClassForm(ModelForm):
     class Meta:
         model = CharacterClass
         fields = '__all__'
         widgets = {'level': Select()}
-
-
-class ClassEntryChoiceField(ModelChoiceField):
-    def label_from_instance(self, obj):
-        return self.classentry.schtick
-
-
-class ClassEntryForm(ModelForm):
-    class Meta:
-        model = ClassEntry
-        fields = '__all__'
-        classentry = ClassEntryChoiceField(queryset=ClassEntry.objects.all(),
-                                           to_field_name="classentry")
-        level = ChoiceField()
 
 
 class CharacterClassForm(ModelForm):
@@ -99,3 +87,4 @@ CharacterSkillFormset = inlineformset_factory(Character, CharacterSkill, extra=1
 CharacterAttributeFormset = inlineformset_factory(Character, CharacterAttribute, form=CharacterAttributeForm, extra=1)
 CharacterSchtickFormset = inlineformset_factory(Character, CharacterSchtick, form=CharacterSchtickForm, extra=1)
 CharacterFlawFormset = inlineformset_factory(Character, CharacterFlaw, form=CharacterFlawForm, extra=1)
+

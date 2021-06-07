@@ -9,7 +9,6 @@
 {% endblock menu-inline %}
 {% block content %}
 <div class="main"></div>
-<div class="main"></div>
 <div class="container"><h3>{{object}}</h3>
 
 <form class="card row" action="{% if object.pk %}{% url 'schtick_detail' object.pk %}{%else%}{% url 'schtick_create' %}{% endif %}" method="post">

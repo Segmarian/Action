@@ -1,0 +1,70 @@
+{% load query_parameters %}
+{% load action_tags %}
+       <table class="table">
+        <thead class="table">
+        <tr scope="row">
+            <th scope="col">
+                Name
+              <a href="?{% set_query_parameters order_by='name'  ordering='desc' %}">
+                  <span class="glyphicon glyphicon-triangle-bottom"></span>
+              </a>
+              <a href="?{% set_query_parameters order_by='name' ordering='asc' %}">
+                  <span class="glyphicon glyphicon-triangle-top"></span>
+              </a></th>
+            </th>
+            <th scope="col" style="width:20%">
+                Prereqs
+              <a href="?{% set_query_parameters order_by='prereqs'  ordering='desc' %}">
+                  <span class="glyphicon glyphicon-triangle-bottom"></span>
+              </a>
+              <a href="?{% set_query_parameters order_by='prereqs' ordering='asc' %}">
+                  <span class="glyphicon glyphicon-triangle-top"></span>
+              </a></th>
+            </th>
+            <th scope="col">
+                Tier / Cost
+              <a href="?{% set_query_parameters order_by='tier'  ordering='desc' %}">
+                  <span class="glyphicon glyphicon-triangle-bottom"></span>
+              </a>
+              <a href="?{% set_query_parameters order_by='tier' ordering='asc' %}">
+                  <span class="glyphicon glyphicon-triangle-top"></span>
+              </a></th>
+            </th>
+            <th scope="col">
+                Type
+              <a href="?{% set_query_parameters order_by='type'  ordering='desc' %}">
+                  <span class="glyphicon glyphicon-triangle-bottom"></span>
+              </a>
+              <a href="?{% set_query_parameters order_by='type' ordering='asc' %}">
+                  <span class="glyphicon glyphicon-triangle-top"></span>
+              </a></th>
+            </th>
+            <th scope="col" style="width: 35%">
+                Description
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for object in list_queryset %}
+                <tr>
+                    <td>
+                        <a href="{%  url 'schtick_detail' object.pk %}">{{ object.name }}</a>
+                    </td>
+                    <td>
+                        {% for req in object.req.all %}{% if not forloop.first %}, {% endif %}{{ req }}{% endfor %}
+                    </td>
+                    <td>
+                        {{ object.tier }}
+                        {% if object.tier != object.cost and object.cost %}
+                         / {{ object.cost }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% for typ in object.type.all %}{% if not forloop.first %}, {% endif %}{{ typ }}{% endfor %}
+                    </td>
+                    <td>
+                        {{ object.description|truncatechars:40 }}
+                    </td>
+            {% endfor %}
+        </tbody>
+    </table>

@@ -1,27 +1,83 @@
 {% extends "base.html" %}
-
+{% load action_tags %}
 {% block menu-inline %}
     <li class="nav-item base">
                     <h5>
                         <a class="nav-link" href="{% url 'schticks' %}">Schticks</a>
                     </h5>
     </li>
+    {% if object.pk %}
+    <li class="nav-item base">
+        <h5>
+            <a class="nav-link" href="{% url 'schtick_delete' object.pk %}">Delete {{object.name}}</a>
+        </h5>
+    </li>
+    {% endif %}
 {% endblock menu-inline %}
 {% block content %}
-<div class="container"><h3>{{object}}</h3>
-
+<div class="container">
+    <h3>{{form.name.value | linebreaks}}</h3>
 <form class="card row" action="{% if object.pk %}{% url 'schtick_detail' object.pk %}{%else%}{% url 'schtick_create' %}{% endif %}" method="post">
 {% csrf_token %}
-    <div class="form-group card-body">
-        {% for field in form %}
-            <div>{{ field.label }}{% if field.name == "req" %}
-                &nbsp;<span><a href="{% url 'prereq_create' %}">New</a></span>
-            {% elif field.name == "type" %}
-                &nbsp;<span><a href="{% url 'schticktype_create' %}">New</a></span>
-            {% endif %}</div><div>{{ field }}
+    <div class="form-group card-body row">
+        <div class='col-sm-8'>
+            <div>
+                {{form.name.label}}
             </div>
-        {% endfor %}
-    <input type="submit" class="btn btn-primary" value="Submit">
+            <div class='card'>
+                {{form.name}}
+            </div>
+        </div>
+        <div class='col-sm-2 col-6'>
+            <div>
+                {{form.cost.label}}
+            </div>
+            <div class="card">
+                {{form.cost}}
+            </div>
+        </div>
+        <div class='col-sm-2 col-6'>
+            <div>
+                {{form.tier.label}}
+            </div>
+            <div class="card">
+                {{form.tier}}
+            </div>
+        </div>
+        <div class='col-12'>
+            <div class='row'>
+            <div class="col base">
+                <h3>{{ form.req.label }}<span class="nav-link badge"><a class="base nav-item" href="{% url 'prereq_create' %}">New</a></span></h3>
+            </div>
+            <span class="col-12" type="button" data-toggle="collapse" data-target="#prereqCollapse" aria-expanded="false" aria-controls="reqCollapse">
+                <h3>{% for item in object.req.all %}<a class="badge badge-primary hollow">{{item}}</a>
+                     {% comment %}{% if item.schtick.req %}{% include 'action/prereq_schtick.html' with object=item.prereq %}{% endif %}
+                    {% endcomment %}{% endfor %}</h3></span>
+            <div class="col card {% if object.req.all %}collapse{%endif%}" id="prereqCollapse">
+                {{form.req}}
+            </div>
+        </div>
+        <div class='col-12'>
+            <div class="nav-link">
+                {{form.description.label}}
+            </div>
+            <div class="card">
+                {{form.description}}
+            </div>
+        </div>
+        <div class='row'>
+            <div class="col base">
+                <h3>{{form.type.label}}<span class="nav-link badge"><a class="base nav-item" href="{% url 'schticktype_create' %}">New</a></span></h3>
+            </div>
+            <span class="col-12" type="button" data-toggle="collapse" data-target="#schtickTypeCollapse" aria-expanded="false" aria-controls="schtickTypeCollapse">
+                <h3>{% for item in object.type.all %}<a class="badge badge-primary hollow" href="{% url 'schticktype_detail' item.pk%}">{{item}}</a> {% endfor %}</h3></span>
+            <div class="col card {% if object.type.all %}collapse{% endif%}" id="schtickTypeCollapse">
+                {{form.type}}
+            </div>
+        </div>
+        <div class="col-12 nav-link card">
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </div>
     </div>
 </form>
 </div>

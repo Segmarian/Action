@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'site.css' %}" />
-    <link href="/static/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'open-iconic-bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'open-iconic-master/font/css/open-iconic-bootstrap.css'%}">
+
     {% block head %}
     {% endblock head %}
 </head>
@@ -29,14 +31,20 @@
             {% block top_panel %}
                 {% endblock top_panel%}
     </nav>
+<div class="main"></div>
     {%if filter %}
-    <div class="main"></div>
-           <div class="container">
+            <span class="col-12" type="button" data-toggle="collapse" data-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
+                <h3><a class="badge badge-primary">Filter</a></h3></span>
+           <div class="container collapse" id="filterCollapse">
             <form action="" method="get">
                <div class="row">
-                    {% for filterform in filter.form %}
-                    <div class="col-sm"><div>{{ filterform.label }}</div><div>{{filterform}}</div></div>
-                    {% endfor %}
+                   <div class="col-sm"><div><h5>{{filter.form.name.label}}</h5></div><div>{{filter.form.name}}</div></div>
+                   <div class="col-sm"><div><h5>{{filter.form.cost.label}}</h5></div><div>{{filter.form.cost}}</div></div>
+                   <div class="col-sm"><div><h5>{{filter.form.tier.label}}</h5></div><div>{{filter.form.tier}}</div></div>
+                   <div class="col-sm"><div><h5>{{filter.form.description.label}}</h5></div><div>{{filter.form.description}}</div></div>
+                   <div class="col-sm"><div><h5>{{filter.form.type__name.label}}</h5></div><div>{{filter.form.type__name}}</div></div>
+                   <div class="col-12"><div><h5>{{filter.form.type.label}}</h5></div><div>{{filter.form.type}}</div></div>
+                   <div class="col-12"><div><h5>{{filter.form.prereqs.label}}</h5></div><div>{{filter.form.prereqs}}</div></div>
                     <div class="col-sm">
                         <div>&nbsp;</div>
                         <div><input class="button" type="submit" value="Send"/></div>
@@ -58,6 +66,7 @@
             </div><!--well -->
           </div><!--span-->
     {% endblock rightsidebar%}
+</div>
 </div>
 </body>
        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

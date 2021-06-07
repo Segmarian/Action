@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'action',
     'character',
     'schtick',
+    'query_parameters',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,5 @@ USE_TZ = True
 
 STATIC_ROOT = '/'
 STATIC_URL = '/static/'
+
+# Add these new lines

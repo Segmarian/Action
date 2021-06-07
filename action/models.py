@@ -82,6 +82,10 @@ class SchtickType(models.Model):
         return self.name
 
     name = models.CharField('Name', max_length=120)
+    schticktype_list = models.ManyToManyField('SchtickType',
+                                              related_name="schticktypes",
+                                              null=True,
+                                              blank=True)
 
 
 class Schtick(models.Model):
@@ -89,17 +93,23 @@ class Schtick(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        typstr = self.name + ":"
-        for typ in self.type.all():
-            typstr += str(typ.name)+"/"
-        typstr = typstr[:-1]
-        return typstr + " (Tier " + str(self.tier) + ")"
+        ext_str = self.name + " ("
+        for item in self.type.all():
+            ext_str = ext_str + str(item) + ", "
+        ext_str = ext_str[:-2]+")"
+        return ext_str
 
     def sort_str(self):
-        return str(self)
+        typstr = self.name + ": \n"
+
+        for typ in self.type.all():
+            typstr += str(typ.name)+", "
+        typstr = typstr[:-2]
+        return typstr + " (Tier " + str(self.tier) + ")"
 
     name = models.CharField('Name', max_length=120)
-    req = models.ManyToManyField("Prereq", related_name="schtickreq", null=True, blank=True)
+    req = models.ManyToManyField("Prereq", related_name="schtickreq",
+                                 blank=True, verbose_name='prereqs')
     cost = models.PositiveSmallIntegerField("Cost", null=True, blank=True)
     description = models.TextField('Description', null=True, blank=True)
     tier = models.PositiveSmallIntegerField("Tier", null=True, blank=True)
@@ -134,6 +144,10 @@ class Advancement(models.Model):
 
 
 class ValuePair(models.Model):
+    class Meta:
+        ordering = ('schtick__name', 'proficiency__name', 'skill__name', 'attribute__name', 'value', )
+        unique_together = [['schtick', 'skill', 'proficiency', 'attribute', 'value']]
+
     def __str__(self):
         return str(self.attribute.name) + \
                str(self.skill.name) + \
@@ -158,7 +172,7 @@ class ValuePair(models.Model):
 
 class Flaw(ValuePair):
     class Meta:
-        ordering = ('name',)
+        ordering = ('name', 'value',)
 
     name = models.CharField('Name', max_length=120)
     description = models.CharField('Description', max_length=120, blank=True, null=True)
@@ -168,8 +182,10 @@ class Flaw(ValuePair):
 
 
 class Prereq(ValuePair):
-    class Meta:
-        ordering = ('attribute', 'skill', 'proficiency', 'schtick', 'value')
+
+    @property
+    def name(self):
+        return self
 
     def __str__(self):
         result = ""
@@ -180,8 +196,9 @@ class Prereq(ValuePair):
         if self.proficiency:
             result += self.proficiency.name + " "
         if self.schtick:
-            result += self.schtick.name + " "
-        result += str(self.value)
+            result += self.schtick.name
+        else:
+            result += str(self.value)
         return result
 
 
@@ -239,7 +256,7 @@ class ClassEntry(models.Model):
         if self.notes:
             notes = " " + self.notes
         if self.schtick:
-            schtick = str(self.schtick.name)
+            schtick = str(self.schtick)
             schtickcost = str(self.schtick.cost) or 0
         if self.flaw:
             flaw = str(self.flaw.name)
@@ -252,3 +269,6 @@ class ClassEntry(models.Model):
     schtick = models.ForeignKey(Schtick, on_delete=models.PROTECT, blank=True, null=True)
     flaw = models.ForeignKey(Flaw, on_delete=models.PROTECT, blank=True, null=True)
     notes = models.CharField('Notes', max_length=120, blank=True, null=True)
+    divisor = models.IntegerField('Divisor', blank=True, null=True)
+    default = models.BooleanField('Default', blank=True, null=True)
+    optional = models.BooleanField('Optional', blank=True, null=True)

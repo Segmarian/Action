@@ -14,13 +14,11 @@
 {% endblock menu-inline %}
 {% block content %}
 {% csrf_token %}
-    <div class="main"></div>
-    <div class="main"></div>
     <div class="container">
+            <h3>
         {% for object in object_list %}
-            <h5>
-                <a class="nav-link" href="{% url 'prereq_detail' object.pk %}">{{object}}</a>
-            </h5>
+                <a class="badge badge-primary hollow" href="{% url 'prereq_detail' object.pk %}">{{object}}</a>
         {% endfor %}
+            </h3>
     </div>
 {% endblock content %}

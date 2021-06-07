@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block menu-inline %}
+    <li class="nav-item base">
+                    <h5>
+                        <a class="nav-link" href="{% url 'characterclass_list' %}">Classes</a>
+                    </h5>
+    </li>
+{% endblock menu-inline %}
+{% block content %}
+<div class="main"></div>
+<div class="container"><h3>{{object}}</h3>
+    {{item}}
+    {% for item in request %}
+        {{item}}
+    {% endfor %}
+<form class="card row" action="{% if object.pk %}{% url 'classentry_detail' object.pk %}{% else %}{% url 'classentry_create' %}{% endif %}" method="post">
+{% csrf_token %}
+    <div class="form-group card-body">
+        {% for field in form %}
+            <div>{{ field.label }}{% if field.name == "schtick" %}
+                &nbsp;<span class="span"><a href="{% url 'schtick_create' %}">New</a></span>
+            {% elif field.name == "flaw" %}
+                &nbsp;<span><a href="{% url 'flaw_create' %}">New</a></span>
+            {% endif %}</div><div>{{ field }}
+            </div>
+        {% endfor %}
+    <input type="submit" class="btn btn-primary" value="Submit">
+    </div>
+</form>
+</div>
+{% endblock content %}

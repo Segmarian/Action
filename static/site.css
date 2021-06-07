@@ -14,7 +14,7 @@
 body {
     font-family: Garamond, serif;
     font-size: 18px;
-    background-color: rgba(255, 212, 0, 0.1);
+    background-color: rgba(255, 212, 0, 1);
     margin-bottom: 3cm;
     border-color: #FFAA00;
     color: #AA5500;
@@ -90,7 +90,7 @@ padding-top: 10px;
 }
 
 .badge-primary{
-    background-color: rgba(255, 170, 0, 1);
+    background-color: rgba(255, 170, 0, 0.5);
     color: black;
     padding: 5px;
     margin-top: 0px;
@@ -137,7 +137,7 @@ input:hover>.btn{
 a, .btn-primary, .btn-submit:hover {
     font-size: 1rem;
     color: rgba(170, 85, 0, 1);
-    background-color: rgba(255, 170, 0, 1);
+    background-color: rgba(255, 170, 0, 0.5);
     border-color: rgba(255, 170, 0, 1);
 }
 
@@ -159,6 +159,10 @@ td>a , th>a{
     border-color: #FA9700;
     padding: 3px;
     border-radius: 3px;
+}
+
+.table-striped{
+    background-color: rgba(255,212,0,0.5);
 }
 
 
@@ -261,6 +265,7 @@ color: rgba(255, 255, 255, 1)
     padding:0rem .75rem 0rem;
     vertical-align: middle!important;
 }
+
 h4{
     margin-bottom: 0.2rem;
 }

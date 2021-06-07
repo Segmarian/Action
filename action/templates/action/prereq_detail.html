@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load query_parameters %}
 {% load action_tags %}
 
 {% block head %}
@@ -11,17 +12,31 @@
                         <a class="nav-link" href="{% url 'prereqs' %}">Prereqs</a>
                     </h5>
     </li>
+    {% if object.pk %}
+        <li class="nav-item base">
+            <h5>
+                <a class="nav-link" href="{% url 'prereq_delete' object.pk %}">Delete {{object.name}}</a>
+            </h5>
+        </li>
+    {% endif %}
 {% endblock menu-inline %}
 {% block content %}
 <div class="main"></div>
 <div class="container">
-<form class="card row" action="{% if object.pk %} {% url 'prereq_detail' object.pk %} {% else %} {% url 'prereq_create' %}{% endif %}" method="post">
-{% csrf_token %}
-    <div class="form-group card-body">
-        {% for field in form %}
-            <div>{{ field.label }}</div><div>{{ field }}</div>
-        {% endfor %}
-    <input type="submit" class="btn btn-primary" value="Submit">
+    <div class="col">
+        <form class="card row" action="{% if object.pk %} {% url 'prereq_detail' object.pk %} {% else %} {% url 'prereq_create' %}{% endif %}" method="post">
+        {% csrf_token %}
+            <div class="form-group card-body">
+                {% for field in form %}
+                    <div>{{ field.label }}</div><div>{{ field }}</div>
+                {% endfor %}
+            <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+        </form>
     </div>
-</form></div>
+    <div class="col">
+        <h3>Schticks with this Prereq</h3>
+        {% include 'action/schticklist_include.html' with list_queryset=object.schtickreq.all %}
+    </div>
+</div>
 {% endblock content %}

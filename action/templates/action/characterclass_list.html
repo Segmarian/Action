@@ -33,9 +33,11 @@
                         <a href="{%  url 'characterclass_detail' object.pk %}">{{ object.name }}</a>
                     </td>
                     <td>
+                        <h3>
                         {%for type in object.schtick_list.all%}
-                        {{ type.name }}&nbsp;
+                        <a class="badge badge-primary hollow" href="{% url 'schticktype_detail' type.pk %}">{{ type.name }}</a>
                         {% endfor %}
+                        </h3>
                     </td>
                     <td>
                         {{ object.tier }}

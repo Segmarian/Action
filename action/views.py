@@ -2,10 +2,12 @@
 from __future__ import unicode_literals
 
 from django.views.generic import ListView, UpdateView, CreateView, TemplateView
+from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from django_filters.views import FilterView
 
 from action.filters import *
+from action.forms import CharacterClassForm, SchtickForm
 from action.models import *
 
 
@@ -23,10 +25,15 @@ class CharacterClassListView (FilterView):
 class CharacterClassUpdateView (UpdateView):
     model = CharacterClass
     template_name = "action/characterclass_detail.html"
-    fields = '__all__'
+    form_class = CharacterClassForm
 
     def get_success_url(self):
         return reverse_lazy('characterclass_detail', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super(CharacterClassUpdateView, self).get_context_data(**kwargs)
+        context['class_entries'] = ClassEntry.objects.filter(characterclass=self.object.pk).order_by('level')
+        return context
 
 
 class CharacterClassCreateView (CreateView):
@@ -45,7 +52,7 @@ class ClassEntryListView (FilterView):
 
 class ClassEntryUpdateView (UpdateView):
     model = ClassEntry
-    template_name = "action/classentryupdate.html"
+    template_name = "action/classentry_detail.html"
     fields = '__all__'
 
     def get_success_url(self):
@@ -54,9 +61,21 @@ class ClassEntryUpdateView (UpdateView):
 
 class ClassEntryCreateView (CreateView):
     model = ClassEntry
-    template_name = "action/classentrycreate.html"
+    template_name = "action/classentry_detail.html"
     fields = '__all__'
     success_url = reverse_lazy('classentry_list', )
+
+
+class ClassEntryCreateFromClassView (ClassEntryCreateView):
+
+    def get_initial(self):
+        initial = super().get_initial()
+        if 'item' in self.kwargs:
+            initial['characterclass'] = self.kwargs['item']
+        return initial
+
+    def get_success_url(self):
+        return reverse_lazy('classentry_detail', kwargs={'pk': self.object.characterclass.pk})
 
 
 class SchtickListView (FilterView):
@@ -68,18 +87,24 @@ class SchtickListView (FilterView):
 
 class SchtickCreateView (CreateView):
     model = Schtick
+    form_class = SchtickForm
     template_name = "action/schtick_detail.html"
-    fields = '__all__'
     success_url = reverse_lazy('schticks', )
 
 
 class SchtickUpdateView (UpdateView):
     model = Schtick
+    form_class = SchtickForm
     template_name = "action/schtick_detail.html"
-    fields = '__all__'
 
     def get_success_url(self):
         return reverse_lazy('schtick_detail', kwargs={"pk": self.object.pk})
+
+
+class SchtickDeleteView (DeleteView):
+    model = Schtick
+    template_name = "action/schtick_delete.html"
+    success_url = reverse_lazy('schticks')
 
 
 class FlawListView (FilterView):
@@ -157,6 +182,18 @@ class PrereqUpdateView (UpdateView):
         return reverse_lazy('prereq_detail', kwargs={"pk": self.object.pk})
 
 
+class PrereqDeleteView (DeleteView):
+    model = Prereq
+    template_name = "action/prereq_delete.html"
+    success_url = reverse_lazy('prereqs')
+
+
+class SchtickTypeDeleteView (DeleteView):
+    model = SchtickType
+    template_name = "action/schticktype_delete.html"
+    success_url = reverse_lazy('schticktypes')
+
+
 class CampaignListView (ListView):
     model = Campaign
     template_name = "action/campaign_list.html"
@@ -177,7 +214,3 @@ class CampaignUpdateView (UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('campaign_detail', kwargs={"pk": self.object.pk})
-
-def product_list(request):
-    f = ProductFilter(request.GET, queryset=Product.objects.all())
-    return render(request, 'my_app/template.html', {'filter': f})

@@ -11,25 +11,70 @@
                         <a class="nav-link" href="{% url 'characterclass_list' %}">Classes</a>
                     </h5>
     </li>
-    <li class="nav-item base">
+<!--    <li class="nav-item base">
                     <h5>
                         <a class="nav-link" href="{% url 'schticktype_return_create' %}">New schticktype</a>
                     </h5>
-    </li>
+    </li>-->
 {% endblock menu-inline %}
 {% block content %}
-{{ object.pk }}
-<div class="main"></div>
 <div class="main"></div>
 <div class="container"><h3>Character Class</h3>
-
-<form class="card row" action="{% if object.pk %} {% url 'characterclass_detail' object.pk %} {%else%} {% url 'characterclass_create' %}{% endif %}" method="post">
+<div class="row"><div class="col">
+<form class="card" action="{% if object.pk %} {% url 'characterclass_detail' object.pk %} {%else%} {% url 'characterclass_create' %}{% endif %}" method="post">
 {% csrf_token %}
     <div class="form-group card-body">
         {% for field in form %}
-            <div>{{ field.label }}{{ field }}</div>
+            <div>{{ field.label }}
+                {% if field.name == "schtick_list" %}
+                <span><a href="{% url 'schticktype_create' %}">New</a></span>
+            {% endif %}</div><div>{{ field }}
+            </div>
         {% endfor %}
-    <input type="submit" class="btn btn-primary" value="Submit">
+        <input type="submit" class="btn btn-primary" value="Submit">
     </div>
 </form></div>
+    <div class="container">
+        <h3>Class Entries</h3>
+        <table class="table table-striped">
+            {% for item in class_entries %}
+            <tr class="row table-row">
+                <td class="col-1"><a href="{% url 'classentry_detail' item.pk %}">Edit</a></td>
+                <td class="col-2">
+                    {{item.level}}{% if item.optional %}
+                    (Optional)
+                    {% endif %}
+                </td>
+                <td class="col-8">
+                    {% if item.schtick %}
+                    {{item.schtick.name}}
+                    {% elif item.flaw %}
+                    {{item.flaw.name}}
+                    {% endif %}
+                    {% if item.notes %}
+                    ({{item.notes}})
+                    {% endif %}
+                    {% if item.schtick %}
+                    {% if item.divisor %}
+                        ({% widthratio item.schtick.tier item.divisor 1 %})
+                    {% else %}
+                        ({% widthratio item.schtick.tier 2 1 %})
+                    {% endif %}
+                    {% elif item.flaw %}
+                    (-{{item.flaw.value}})
+                    {% endif %}
+                </td>
+                <td class="col-1">
+                    {% if item.divisor %}
+                     {{item.divisor}}
+                    {% endif %}
+                </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td><a href="{% url 'classentry_create_from_class' object.pk %}">Add class entry</a></td>
+            </tr>
+    </table>
+    </div>
+</div>
 {% endblock content %}
