@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from logging import debug
+
+from django.conf.urls import url
 from django.db.models import Count
 from django.forms import ChoiceField
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, UpdateView, FormView, CreateView
+from django.views.generic import ListView, UpdateView, FormView, CreateView, TemplateView
 from character.forms import *
 from character.models import *
 
@@ -94,7 +98,7 @@ class CharacterDetailView (UpdateView):
                                               instance=self.object,
                                               prefix='characterskill')
         proficiency_formsets = {}
-        for characterskill in CharacterSkill.objects.filter(character=self.object):
+        for characterskill in CharacterSkill.objects.filter(character=self.object.pk):
             proficiency_formsets[characterskill] = CharacterProficiencyFormset(request.POST,
                                                                                instance=characterskill,
                                                                                prefix=characterskill.skill.name)
@@ -257,6 +261,50 @@ class CharacterDetailView (UpdateView):
 
     def get_success_url(self):
         return reverse('character_detail', kwargs={'pk': self.object.pk})
+
+
+class CharacterResetSkillView (CharacterDetailView):
+
+    def reset_skills(self):
+        for characterskill in CharacterSkill.objects.filter(character=self.kwargs['pk']):
+            for proficiency in CharacterProficiency.objects.filter(characterskill=characterskill):
+                print(proficiency)
+                proficiency.delete()
+        for characterskill in CharacterSkill.objects.all():
+            for proficiency in Proficiency.objects.filter(skill=characterskill.skill):
+                cp = CharacterProficiency(
+                    characterskill=characterskill,
+                    proficiency=proficiency,
+                    acquired=False
+                )
+                cp.save()
+
+    def get(self, request, *args, **kwargs):
+        self.reset_skills()
+        return super().get(request, *args, **kwargs)
+
+
+class CharacterResetSkillSingleView(CharacterDetailView):
+    def reset_skill(self):
+            cs = self.kwargs['charskill']
+            charskill = CharacterSkill.objects.get(pk=cs)
+            charproficiency = CharacterProficiency.objects.filter(characterskill=charskill)
+            proficiency = Proficiency.objects.filter(skill=charskill.skill)
+            print(charproficiency)
+            for old_cp in charproficiency:
+                old_cp.delete()
+            print(proficiency)
+            for item in proficiency:
+                cp = CharacterProficiency(
+                    characterskill=charskill,
+                    proficiency=item,
+                    acquired=False
+                )
+                cp.save()
+
+    def get(self, request, *args, **kwargs):
+        self.reset_skill()
+        return super().get(request, *args, **kwargs)
 
 
 class CharacterSchtickView (UpdateView):

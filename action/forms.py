@@ -56,6 +56,10 @@ class CharacterClassForm(ModelForm):
         model = CharacterClass
         fields = '__all__'
 
+    schtick_list = SchtickListModelMultipleChoiceField(queryset=SchtickType.objects.all(),
+                                               widget=ActionCheckboxSelectMultiple,
+                                               required=False)
+
 
 class ClassEntryForm(ModelForm):
     class Meta:

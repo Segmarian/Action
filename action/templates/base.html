@@ -15,6 +15,10 @@
     {% endblock head %}
 </head>
 <body>
+        <badge class="nav-item"><a href="#">Debug information</a></badge>
+        <div id="" class="collapse">
+           <pre> {% filter force_escape %} {% debug %} {% endfilter %} </pre>
+        </div>
         {% for message in messages %}
         {{message}}
         {% endfor %}

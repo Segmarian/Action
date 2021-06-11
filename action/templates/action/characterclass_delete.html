@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block menu-inline %}
+    <li class="nav-item base">
+                    <h5>
+                        <a class="nav-link" href="{% url 'schticks' %}">Schticks</a>
+                    </h5>
+    </li>
+{% endblock menu-inline %}
+{% block content %}
+<div class="container"><h3>{{object}}</h3>
+    <form method="post">{% csrf_token %}
+
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+
+        <input type="submit" value="Confirm">
+</form>
+</div>
+{% endblock content %}

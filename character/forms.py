@@ -32,11 +32,13 @@ class CharacterProficiencyForm(ModelForm):
         fields = ['proficiency', 'acquired', 'characterskill']
         widgets = {'characterskill': HiddenInput(), 'proficiency': HiddenInput(), 'acquired': CheckboxInput()}
 
-
 class CharacterAttributeForm(ModelForm):
     class Meta:
         model = CharacterAttribute
         fields = ['attribute', 'points']
+        widgets = {'attribute': Select(attrs={'class': 'col'}),
+                   'points': NumberInput(attrs={'class': 'col-xs-1',
+                                                'style': 'width:60px'})}
 
 
 class CharacterFlawForm(ModelForm):
@@ -77,14 +79,14 @@ class CharacterClassentryForm(ModelForm):
                    'classentry': Select(attrs={'class': 'col-sm-12'})}
 
 
-CharacterClassFormset = inlineformset_factory(Character, CharacterCharacterClass, extra=1,
+CharacterClassFormset = inlineformset_factory(Character, CharacterCharacterClass, max_num=3,
                                               form=CharacterClassForm)
 CharacterClassentryFormset = inlineformset_factory(CharacterCharacterClass, CharacterClassEntry, extra=1,
                                                    form=CharacterClassentryForm)
 CharacterProficiencyFormset = inlineformset_factory(CharacterSkill, CharacterProficiency, form=CharacterProficiencyForm,
-                                                    extra=1)
-CharacterSkillFormset = inlineformset_factory(Character, CharacterSkill, extra=1, form=CharacterSkillForm)
-CharacterAttributeFormset = inlineformset_factory(Character, CharacterAttribute, form=CharacterAttributeForm, extra=1)
+                                                    extra=0)
+CharacterSkillFormset = inlineformset_factory(Character, CharacterSkill, extra=0, form=CharacterSkillForm)
+CharacterAttributeFormset = inlineformset_factory(Character, CharacterAttribute, form=CharacterAttributeForm, extra=0)
 CharacterSchtickFormset = inlineformset_factory(Character, CharacterSchtick, form=CharacterSchtickForm, extra=1)
 CharacterFlawFormset = inlineformset_factory(Character, CharacterFlaw, form=CharacterFlawForm, extra=1)
 

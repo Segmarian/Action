@@ -8,6 +8,13 @@
 {% block menu-inline %}
     <li class="nav-item base">
         <h5>
+            <a href="{% url 'characters' %}" class="nav-link">
+                List
+            </a>
+        </h5>
+    </li>
+    <li class="nav-item base">
+        <h5>
             <a href="#" class="nav-link" data-toggle="collapse" data-target="#chardata">
                 Character
             </a>
@@ -54,7 +61,6 @@
     <span>
     </span>
     <form id="character" action="{% url 'character_detail' object.pk %}" method="post">
-        <div class="main"></div>
         <div class="container">
         {% csrf_token %}
             <div id="chardata" class="collapse.show card card-body row {{ section.character }}">
@@ -66,22 +72,20 @@
                     <input type="submit" class="btn btn-primary" value="Submit">
                 </div>
             </div>
-            <div id="attributes" class="card collapse {{ section.attribute }}">
+            <div id="attributes" class="collapse {{ section.attribute }}">
                 <div>{{ object.xp.attribute }}</div>
                 <div class="card-body row">
                     {{ character_attribute_formset.management_form }}
                     {% for form in character_attribute_formset %}
-                        <div class="form-inline col-sm-4" style="margin-bottom:20px">
+                        <div class="form-inline col-md-6 col-lg-4 row" style="margin-bottom:20px">
                             {% for field in form %}
                                 {% if field.label == "Attribute" %}
-                                    <div class="col-sm-5">{{ field }}</div>
+                                    <div class="col" style="padding:5px">{{ field }}</div>
                                 {% else %}
                                     {% if not field.is_hidden %}
-                                        <div class="col-3">
-                                            <div class="float-left">{{ field }}</div>
-                                        </div>
+                                            <div class="col-xs-1" style="padding:5px">{{ field }}</div>
                                     {% else %}
-                                        <div class="col-3">{{ field }}</div>
+                                        <div>{{ field }}</div>
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
@@ -138,6 +142,7 @@
                                                 {% endif %}
                                             </div>
                                         {% endfor %}
+                                    <h3><badge class="nav-item"><a href="{% url 'character_reset_skill_single' object.pk charform.id.value %}">Reset</a></badge></h3>
                                     {% endwith %}
                                 {% endif %}
                             {% endfor %}
@@ -147,6 +152,8 @@
                 </div>
                 <div class="row card-body">
                     <input type="submit" name="character_skill" class="btn btn-primary" value="Submit">
+                    <div class="col"><h3 class="float-right"><span class="nav-item"><a href="{% url 'character_reset_skill' object.pk %}">Reset skills</a></span></h3></div>
+                    TODO: The same for each individual skill, but not remove, only add
                 </div>
             </div>
             <div id="schticks" class="card collapse {{ section.schtick }}">

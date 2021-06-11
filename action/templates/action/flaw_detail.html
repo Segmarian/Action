@@ -3,15 +3,22 @@
 {% block menu-inline %}
     <li class="nav-item base">
                     <h5>
-                        <a class="nav-link" href="{% url 'schticks' %}">Schticks</a>
+                        <a class="nav-link" href="{% url 'flaws' %}">Flaws</a>
                     </h5>
     </li>
+    {% if object.pk %}
+    <li class="nav-item base">
+        <h5>
+            <a class="nav-link" href="{% url 'flaw_delete' object.pk %}">Delete {{object.name}}</a>
+        </h5>
+    </li>
+    {% endif %}
 {% endblock menu-inline %}
 {% block content %}
 <div class="main"></div>
 <div class="container"><h3>{{object}}</h3>
 
-<form class="card row" action="{% if object.pk %}{% url 'schtick_detail' object.pk %}{%else%}{% url 'schtick_create' %}{% endif %}" method="post">
+<form class="card row" action="{% if object.pk %}{% url 'flaw_detail' object.pk %}{%else%}{% url 'flaw_create' %}{% endif %}" method="post">
     {{object.pk}}
 {% csrf_token %}
     <div class="form-group card-body">
@@ -23,7 +30,9 @@
             {% endif %}</div><div>{{ field }}
             </div>
         {% endfor %}
-    <input type="submit" class="btn btn-primary" value="Submit">
+        <div>
+        <input type="submit" class="btn btn-primary" value="Submit">
+        </div>
     </div>
 </form>
 </div>

@@ -11,27 +11,35 @@
                         <a class="nav-link" href="{% url 'characterclass_list' %}">Classes</a>
                     </h5>
     </li>
-<!--    <li class="nav-item base">
-                    <h5>
-                        <a class="nav-link" href="{% url 'schticktype_return_create' %}">New schticktype</a>
-                    </h5>
-    </li>-->
+    {% if object.pk %}
+    <li class="nav-item base">
+        <h5>
+            <a class="nav-link" href="{% url 'characterclass_delete' object.pk %}">Delete {{object.name}}</a>
+        </h5>
+    </li>
+    {% endif %}
 {% endblock menu-inline %}
 {% block content %}
-<div class="main"></div>
 <div class="container"><h3>Character Class</h3>
 <div class="row"><div class="col">
 <form class="card" action="{% if object.pk %} {% url 'characterclass_detail' object.pk %} {%else%} {% url 'characterclass_create' %}{% endif %}" method="post">
 {% csrf_token %}
     <div class="form-group card-body">
-        {% for field in form %}
-            <div>{{ field.label }}
-                {% if field.name == "schtick_list" %}
-                <span><a href="{% url 'schticktype_create' %}">New</a></span>
-            {% endif %}</div><div>{{ field }}
+        <div>{{ form.name }}</div>
+        <div>&nbsp;</div>
+        <div class='row'>
+            <div class="col base">
+                <h3>{{form.schtick_list.label}}<span class="nav-link badge"><a class="base nav-item" href="{% url 'schticktype_create' %}">New</a></span></h3>
             </div>
-        {% endfor %}
+            <span class="col-12" type="button" data-toggle="collapse" data-target="#schtickTypeCollapse" aria-expanded="false" aria-controls="schtickTypeCollapse">
+                <h3>{% for item in object.schtick_list.all %}<a class="badge badge-primary hollow" href="{% url 'schticktype_detail' item.pk%}">{{item}}</a> {% endfor %}</h3></span>
+            <div class="col card {% if object.schtick_list.all %}collapse{% endif%}" id="schtickTypeCollapse">
+                {{form.schtick_list}}
+            </div>
+        </div>
+        <div>
         <input type="submit" class="btn btn-primary" value="Submit">
+        </div>
     </div>
 </form></div>
     <div class="container">
@@ -39,13 +47,14 @@
         <table class="table table-striped">
             {% for item in class_entries %}
             <tr class="row table-row">
-                <td class="col-1"><a href="{% url 'classentry_detail' item.pk %}">Edit</a></td>
-                <td class="col-2">
+                <td class="col-2"><a href="{% url 'classentry_detail_from_class' item.pk object.pk %}">Edit</a>
+                <a href="{% url 'classentry_delete' item.pk %}">Delete</a></td>
+                <td class="col-3">
                     {{item.level}}{% if item.optional %}
                     (Optional)
                     {% endif %}
                 </td>
-                <td class="col-8">
+                <td class="col-6">
                     {% if item.schtick %}
                     {{item.schtick.name}}
                     {% elif item.flaw %}
@@ -71,9 +80,11 @@
                 </td>
                 </tr>
             {% endfor %}
+            {% if object.pk %}
             <tr>
-                <td><a href="{% url 'classentry_create_from_class' object.pk %}">Add class entry</a></td>
+                <td><a href="{% url 'add_classentry_from_class' object.pk %}">Add class entry</a></td>
             </tr>
+            {% endif %}
     </table>
     </div>
 </div>

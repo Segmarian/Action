@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['92.34.242.48', '127.0.0.1', 'character.pythonanywhere.com']
 
+INTERNAL_IPS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'character',
     'schtick',
     'query_parameters',
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
